@@ -1,6 +1,16 @@
-module.exports.run = (client, message, args) => {
-    client.users.send('936640230272942091', args.slice(0).join(" ") + ` - Sent by ${message.author}`);
-    message.channel.send(`${message.author} - Reminder sent to pepper`);
-};
+const {SlashCommandBuilder} = require('discord.js');
 
-module.exports.name = "toAdd";
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName('toadd')
+        .setDescription('Sends pepper something to fix/add')
+        .addStringOption(option =>
+            option.setName('reminder')
+                .setDescription('The input to echo back')
+                .setRequired(true)),
+ 
+    run: ({ interaction, client, handler }) => {
+        client.users.send('936640230272942091', interaction.options.getString('reminder') + ` - Sent by ${interaction.user}`);
+        interaction.reply(`${interaction.user} - Reminder sent to pepper`);
+    },
+};

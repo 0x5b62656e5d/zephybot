@@ -1,9 +1,13 @@
-module.exports.run = (client, message, args) => {
-  	if (message.author.id === '936640230272942091') {
-    	return message.channel.send(`# pong   🏓\n${Date.now() - message.createdTimestamp}ms`);
-  	} else {
-    	return message.channel.send("You don't have the permissions to run `?ping`");
-  	}
+module.exports = {
+    data: {
+        name: 'ping',
+        description: 'pong',
+    },
+ 
+    run: ({ interaction, client, handler }) => {
+		if (interaction.user.id != '936640230272942091') {
+            return interaction.reply("You don't have the permissions to run this command");
+        }
+        interaction.reply(`# pong   🏓\n${Date.now() - interaction.createdTimestamp}ms`);
+    },
 };
-
-module.exports.name = "ping";
