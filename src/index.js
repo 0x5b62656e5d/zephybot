@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fs = require("fs");
 require("dotenv").config();
 
 const Discord = require("discord.js");
@@ -15,6 +16,14 @@ app.listen(3000, () => {
 client.on("ready", async () => {
 	console.log("Slash commands initialized");
 })
+
+client.commands = new Discord.Collection();
+const commands = fs.readdirSync("./src/Commands").filter(file => file.endsWith(".js"));
+commandslist = [];
+for (file of commands) {
+    commandslist.push(file.split(".")[0]);
+}
+module.exports = { commandslist };
 
 new CommandKit({
     client,
