@@ -28,6 +28,7 @@ module.exports = { commandslist };
 new CommandKit({
     client,
     commandsPath: path.join(__dirname, 'Commands'),
+    eventsPath: path.join(__dirname, 'events'),
     devGuildIds: ['1064736062125113485'],
     devUserIds: ['936640230272942091'],
 });
