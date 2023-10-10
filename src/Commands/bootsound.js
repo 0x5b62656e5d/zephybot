@@ -7,6 +7,17 @@ module.exports = {
     },
  
     run: ({ interaction, client, handler }) => {
-        interaction.reply(`# Disabling laptop boot sound\n${string}`);
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel('Delete')
+            .setStyle(ButtonStyle.Danger);
+        
+        const row = new ActionRowBuilder()
+			.addComponents(delMsg);
+        
+        interaction.reply({
+            content: `# Disabling laptop boot sound\n${string}`,
+            components: [row],
+        });
     },
 };

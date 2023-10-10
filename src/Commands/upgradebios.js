@@ -7,6 +7,17 @@ module.exports = {
     },
  
     run: ({ interaction, client, handler }) => {
-        interaction.reply(`# Upgrading BIOS\n${string}`);
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel('Delete')
+            .setStyle(ButtonStyle.Danger);
+        
+        const row = new ActionRowBuilder()
+			.addComponents(delMsg);
+        
+        interaction.reply({
+            content: `# Upgrading BIOS\n${string}`,
+            components: [row],
+        });
     },
 };

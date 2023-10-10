@@ -7,6 +7,17 @@ module.exports = {
     },
  
     run: ({ interaction, client, handler }) => {
-        interaction.reply(`# Linux\n${string}`);
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel('Delete')
+            .setStyle(ButtonStyle.Danger);
+        
+        const row = new ActionRowBuilder()
+			.addComponents(delMsg);
+        
+        interaction.reply({
+            content: `# Linux\n${string}`,
+            components: [row],
+        });
     },
 };

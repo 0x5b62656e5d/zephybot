@@ -7,6 +7,17 @@ module.exports = {
     },
  
     run: ({ interaction, client, handler }) => {
-        interaction.reply(`# Asus services\n${string}`);
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel('Delete')
+            .setStyle(ButtonStyle.Danger);
+        
+        const row = new ActionRowBuilder()
+			.addComponents(delMsg);
+        
+        interaction.reply({
+            content: `# Asus services\n${string}`,
+            components: [row],
+        });
     },
 };
