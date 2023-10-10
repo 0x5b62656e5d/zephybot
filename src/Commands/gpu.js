@@ -1,3 +1,5 @@
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+
 const string = "Q: *Geforce experience says I'm not able to update my graphics drivers. Why? My GPU's fine!*\nA: Are you on eco? If so, switch to optimized or standard.";
 
 module.exports = {

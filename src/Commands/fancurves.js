@@ -1,3 +1,5 @@
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+
 const string = "When you're gaming, you typically shouldn't need `Turbo`. `Balanced` fan curve should be enough\nSecondly, you shouldn't need to do custom fan curves either. Stock fan curves in GHelper should be enough.";
 
 module.exports = {
