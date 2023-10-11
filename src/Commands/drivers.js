@@ -1,12 +1,12 @@
-const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "Let Windows updates take care of your drivers. Asus drivers can get pretty old, as they don't update them often. If you don't have internet access, use ethernet or plug your phone into your laptop for hotspot.\nFor graphics drivers, install them from their respective vendors.";
+const string = "# Drivers\nLet Windows updates take care of your drivers. Asus drivers can get pretty old, as they don't update them often. If you don't have internet access, use ethernet or plug your phone into your laptop for hotspot.\nFor graphics drivers, install them from their respective vendors.";
 
 module.exports = {
-    data: {
-        name: 'drivers',
-        description: 'Drivers FAQ',
-    },
+    data: new SlashCommandBuilder()
+        .setName('drivers')
+        .setDescription('Drivers FAQ')
+        .addUserOption(option => option.setName('target').setDescription('User to tag')),
  
     run: ({ interaction, client, handler }) => {
         const delMsg = new ButtonBuilder()
@@ -17,8 +17,15 @@ module.exports = {
         const row = new ActionRowBuilder()
 			.addComponents(delMsg);
         
+        if (interaction.options.getUser('target') === null) {
+            return interaction.reply({
+                content: `${string}`,
+                components: [row],
+            });
+        }
+            
         interaction.reply({
-            content: `# Drivers\n${string}`,
+            content: `*Suggestion for <@${interaction.options.getUser('target').id}>*\n${string}`,
             components: [row],
         });
     },

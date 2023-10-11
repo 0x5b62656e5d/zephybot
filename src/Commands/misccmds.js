@@ -1,12 +1,12 @@
-const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "sfc: `sfc /scannow`\nThis command scans all protected system files and replaces any corrupted files with a cached copy. (Optional) Run the `DISM` command before running the `sfc` command.\n\nDISM: `DISM /online /cleanup-image /restorehealth`\n- `/restorehealth` option will automatically scan and repair common issues\n- `/scanhealth` option performs a more advanced scan to determine whether the image has any problems\n- `/checkhealth` option determines any corruptions inside the local Windows image (Does not perform any repairs)\n\n***Reboot after running either/both commands***";
+const string = "# Misc commands\nsfc: `sfc /scannow`\nThis command scans all protected system files and replaces any corrupted files with a cached copy. (Optional) Run the `DISM` command before running the `sfc` command.\n\nDISM: `DISM /online /cleanup-image /restorehealth`\n- `/restorehealth` option will automatically scan and repair common issues\n- `/scanhealth` option performs a more advanced scan to determine whether the image has any problems\n- `/checkhealth` option determines any corruptions inside the local Windows image (Does not perform any repairs)\n\n***Reboot after running either/both commands***";
 
 module.exports = {
-    data: {
-        name: 'misccmds',
-        description: 'Miscellaneous commands',
-    },
+    data: new SlashCommandBuilder()
+        .setName('misccmds')
+        .setDescription('Miscellaneous commands')
+        .addUserOption(option => option.setName('target').setDescription('User to tag')),
  
     run: ({ interaction, client, handler }) => {
         const delMsg = new ButtonBuilder()
@@ -17,8 +17,15 @@ module.exports = {
         const row = new ActionRowBuilder()
 			.addComponents(delMsg);
         
+        if (interaction.options.getUser('target') === null) {
+            return interaction.reply({
+                content: `${string}`,
+                components: [row],
+            });
+        }
+        
         interaction.reply({
-            content: `# Misc commands\n${string}`,
+            content: `*Suggestion for <@${interaction.options.getUser('target').id}>*\n${string}`,
             components: [row],
         });
     },

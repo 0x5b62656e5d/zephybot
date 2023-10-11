@@ -1,12 +1,12 @@
-const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "Q: *Geforce experience says I'm not able to update my graphics drivers. Why? My GPU's fine!*\nA: Are you on eco? If so, switch to optimized or standard.";
+const string = "# GPU\nQ: *Geforce experience says I'm not able to update my graphics drivers. Why? My GPU's fine!*\nA: Are you on eco? If so, switch to optimized or standard.";
 
 module.exports = {
-    data: {
-        name: 'gpu',
-        description: 'GPU FAQ',
-    },
+    data: new SlashCommandBuilder()
+        .setName('gpu')
+        .setDescription('GPU FAQ')
+        .addUserOption(option => option.setName('target').setDescription('User to tag')),
  
     run: ({ interaction, client, handler }) => {
         const delMsg = new ButtonBuilder()
@@ -17,8 +17,15 @@ module.exports = {
         const row = new ActionRowBuilder()
 			.addComponents(delMsg);
         
+        if (interaction.options.getUser('target') === null) {
+            return interaction.reply({
+                content: `${string}`,
+                components: [row],
+            });
+        }
+            
         interaction.reply({
-            content: `# GPU\n${string}`,
+            content: `*Suggestion for <@${interaction.options.getUser('target').id}>*\n${string}`,
             components: [row],
         });
     },
