@@ -11,6 +11,9 @@ module.exports = {
  
     run: ({ interaction, client, handler }) => {
         client.users.send('936640230272942091', interaction.options.getString('reminder') + ` - Sent by ${interaction.user}`);
-        interaction.reply(`${interaction.user} - Reminder sent to pepper`);
+        interaction.reply({
+            content: `${interaction.user} - Reminder sent to pepper`,
+            ephemeral: true,
+        });
     },
 };
