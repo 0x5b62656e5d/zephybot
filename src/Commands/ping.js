@@ -5,6 +5,9 @@ module.exports = {
     },
  
     run: ({ interaction, client, handler }) => {
-        interaction.reply({ content: `# pong   🏓\n${Date.now() - interaction.createdTimestamp}ms`, ephemeral: true });
+        interaction.reply({
+            content: `# pong   🏓\n${Date.now() - interaction.createdTimestamp}ms`,
+            ephemeral: true
+        });
     },
 };
