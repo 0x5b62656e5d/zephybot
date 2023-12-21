@@ -8,7 +8,7 @@ const client = new Discord.Client({intents: [Discord.GatewayIntentBits.Guilds, D
 
 client.on("ready", async () => {
 	console.log("Zephybot is awake :>");
-})
+});
 
 client.commands = new Discord.Collection();
 const commands = fs.readdirSync("./src/Commands").filter(file => file.endsWith(".js"));
@@ -22,8 +22,8 @@ new CommandKit({
     client,
     commandsPath: path.join(__dirname, 'Commands'),
     eventsPath: path.join(__dirname, 'events'),
-    devGuildIds: ['1064736062125113485'],
-    devUserIds: ['936640230272942091'],
+    devGuildIds: [process.env.DEV_GUILD_ID],
+    devUserIds: [process.env.DEV_USER_ID],
 });
 
 client.login(process.env.TOKEN);

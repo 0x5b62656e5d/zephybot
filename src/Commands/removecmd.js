@@ -21,7 +21,7 @@ module.exports = {
                 .setRequired(true)),
  
     run: ({ interaction, client, handler }) => {
-        if (interaction.user.id != '936640230272942091') {
+        if (interaction.user.id != process.env.DEV_USER_ID) {
             return interaction.reply("You don't have the permissions to remove commands");
         }
 
@@ -33,7 +33,7 @@ module.exports = {
                 })
                 .catch(console.error);
         } else if (interaction.options.getString('type') === "guild") {
-            rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.GUILD_ID, `${interaction.options.getString('commandid')}`))
+            rest.delete(Routes.applicationGuildCommand(process.env.CLIENT_ID, process.env.DEV_GUILD_ID, `${interaction.options.getString('commandid')}`))
                 .then(() => {
                     console.log(`Successfully removed guild command (ID: ${interaction.options.getString('commandid')})`);
                     interaction.reply(`Successfully removed guild command (ID: ${interaction.options.getString('commandid')})`);
