@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# Connectivity issues\nIf you have wireless issues, you could try performing an `NVRAM Reset` (run `?nvram`).\nIf the issue still persists and your laptop has the Mediatek wireless card, I suggest swapping it out to an Intel AX210.";
+const string = "# Connectivity issues\nIf you have wireless issues, you could try performing an `NVRAM Reset` (run `?nvram`).\nIf the issue still persists and your laptop has the Mediatek wireless card, it's recommended to swap it out to an Intel AX210.";
 
 module.exports = {
     data: new SlashCommandBuilder()
