@@ -5,7 +5,8 @@ const string = "Source code: <https://github.com/0x5b62656e5d/zephybot>";
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('sourcecode')
-        .setDescription('Source code of bot'),
+        .setDescription('Source code of bot')
+        .addUserOption(option => option.setName('target').setDescription('User to tag')),
 
     run: ({ interaction, client, handler }) => {
         const delMsg = new ButtonBuilder()
@@ -24,7 +25,7 @@ module.exports = {
         }
         
         interaction.reply({
-            content: `*Suggestion for <@${interaction.options.getUser('target').id}>*\n${string}`,
+            content: `<@${interaction.options.getUser('target').id}>\n${string}`,
             components: [row],
         });
     },
