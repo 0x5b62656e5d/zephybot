@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# Display IO\nQ: *Which ports use dGPU and which ports use iGPU?*\n\n***HDMI*** - dGPU\n***Right USBC*** - dGPU\n***Left USBC*** - iGPU";
+const string = "# Display IO\n\nQ: *Which ports use dGPU and which ports use iGPU?*\n\n***HDMI*** - dGPU\n***Right USBC*** - dGPU\n***Left USBC*** - iGPU\n\nNote: 2021 and older Zephyrus models have different IO ports:\n***HDMI*** - iGPU\n***Left USBC*** - dGPU";
 
 module.exports = {
     data: new SlashCommandBuilder()
