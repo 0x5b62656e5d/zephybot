@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# GPU\nQ: *Geforce experience says I'm not able to update my graphics drivers. Why? My GPU's fine!*\nA: Are you on eco? If so, switch to optimized or standard.";
+const string = "# GPU\n\nQ: *Geforce experience says I'm not able to update my graphics drivers. Why?*\nA: Are you on eco GPU mode? If so, switch to optimized or standard in G-Helper.";
 
 module.exports = {
     data: new SlashCommandBuilder()
