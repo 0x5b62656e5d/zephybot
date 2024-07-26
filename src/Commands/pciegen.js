@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# PCIe compatability\nQ: *Can I install a Gen 4 PCIe SSD into my Gen 3 slot?*\nA: Yes, you can. However, the Gen 4 SSD will run at Gen 3 speeds.";
+const string = "# PCIe compatability\n\nQ: *Can I install a Gen 4 PCIe SSD into my Gen 3 slot?*\nA: Yes, you can. However, the Gen 4 SSD will run at Gen 3 speeds.";
 
 module.exports = {
     data: new SlashCommandBuilder()
