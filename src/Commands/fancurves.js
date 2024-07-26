@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# Fan curves\nWhen you're gaming, you typically shouldn't need `Turbo`. `Balanced` fan curve should be enough\nSecondly, you shouldn't need to do custom fan curves either. Stock fan curves in GHelper should be enough.";
+const string = "# Fan curves\n\nQ: *Are there any good custom fan curves? Should I use my own?*\nA: No, you shouldn't need to mess with fan curves; the defaults are perfectly fine.\n\nQ: *But my laptop is too hot!!!*\nA: Refer to `/temps`. Unless your CPU is exceeding 98 and/or GPU exceeding 84-86, there's nothing to worry about.";
 
 module.exports = {
     data: new SlashCommandBuilder()
