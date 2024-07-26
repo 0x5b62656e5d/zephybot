@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# Cleaning fans\nQ: *Do I need to unplug the battery when cleaning the fans?*\nA: No, I strongly suggest against it. Lots of people come in here or the Zephyrus subreddit because their board got shorted/fried in the process. Just shut down your laptop, and clean the laptop.\n\nSecondly, I also strongly suggest against using brushes. Being too rough can damage/break the fins. A can of compressed air (blow gently) or an electric duster should do the job. Additionally, ***do not*** let the fans spin on its own when blowing on it. This can generate current and can damage components.";
+const string = "# Cleaning fans\n\nQ: *Do I need to unplug the battery when cleaning the fans?*\nA: No, you don't need to. Just shut down your laptop and clean it.\n\nQ: *What tools do I need?*\nA: A can of compressed air or an electric duster is fine. Just make sure to blow gently. Also, ***do not*** let the fans spin on its own. This can generate current and damage components. ***Do not*** use brushes either, being too rough will damage the fans.";
 
 module.exports = {
     data: new SlashCommandBuilder()
