@@ -1,7 +1,7 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string1 = "# Upgrading\nQ: *Do I need to unplug the battery when upgrading SSD, wireless card, or RAM?*\nA: Go ahead if you want, but I strongly suggest against it. Lots of people come in here or the Zephyrus subreddit because their board got shorted/fried in the process. Just shut down your laptop, and upgrade the parts.";
-const string2 = "# Upgrading - Battery Cutoff\nSome models are known to have a sensor that automatically cuts the battery circuit when the laptop cover is opened (eg, M16 2023).\n\nIf you see this sensor on your motherboard, then you absolutely will not need to disconnect the battery for basic tasks like cleaning and/or upgrades.\nNote: You shouldn't need to disconnect the battery on models that don't have the sensor either. Just shut down your laptop and continue with cleaning/upgrades (Refer to `/upgrading`)\n\nhttps://imgur.com/a/q1uNZzr";
+const string1 = "# Upgrading\n\nQ: *Do I need to unplug the battery when upgrading SSD, wireless card, or RAM?*\nA: No, you shouldn't need to. Lots of people come in here or the Zephyrus subreddit because their board got shorted/fried in the process. Just shut down your laptop and upgrade/replace the parts.";
+const string2 = "# Upgrading - Battery Cutoff\n\nSome models are known to have a sensor that automatically cuts the battery circuit when the laptop cover is opened (eg, M16 2023).\n\nIf you see this sensor on your motherboard, then you absolutely will not need to disconnect the battery for basic tasks like cleaning and/or upgrades.\nNote: You shouldn't need to disconnect the battery on models that don't have the sensor either. Just shut down your laptop and continue with cleaning/upgrades (Refer to `/upgrading`).\n\nhttps://imgur.com/a/q1uNZzr";
 
 module.exports = {
     data: new SlashCommandBuilder()
