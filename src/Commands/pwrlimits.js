@@ -1,6 +1,6 @@
 const { ButtonBuilder, ButtonStyle, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 
-const string = "# Power limits\nI strongly suggest ***against*** undervolting or setting any sort of power limits for your CPU. If you dont wan't your laptop to get that hot, reduce the `CPU Temp Limit` setting. This will change when the CPU will start to throttle. It will affect your performance, however, will be more effective at reducing temps compared to undervolting.";
+const string = "# Power limits\n\nQ: *What values should I set my CPU power settings to? How about GPU?*\nA: You shouldn't need to touch any sort of power limits. If you want to achieve decent battery life, refer to `/basics`. If doing so did not improve battery life, then you got unlucky in the silicon lottery. However, if you insist, just reduce the `CPU Temp Limit` setting in G-Helper.";
 
 module.exports = {
     data: new SlashCommandBuilder()
