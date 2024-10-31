@@ -12,7 +12,7 @@ client.on("ready", async () => {
 
 client.commands = new Discord.Collection();
 const commands = fs.readdirSync("./src/Commands").filter(file => file.endsWith(".js"));
-commandslist = [];
+const commandslist = [];
 for (file of commands) {
     commandslist.push(file.split(".")[0]);
 }
