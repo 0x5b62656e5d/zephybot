@@ -1,0 +1,30 @@
+{
+  "name": "zephybot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0x5b62656e5d/zephybot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/0x5b62656e5d/zephybot/issues"
+  },
+  "homepage": "https://github.com/0x5b62656e5d/zephybot#readme",
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "commandkit": "^0.1.10",
+    "discord.js": "^14.19.2",
+    "dotenv": "^16.5.0"
+  }
+}
