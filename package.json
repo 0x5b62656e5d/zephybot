@@ -20,10 +20,10 @@
   "homepage": "https://github.com/0x5b62656e5d/zephybot#readme",
   "devDependencies": {
     "@types/node": "^22.15.3",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "commandkit": "^0.1.6",
     "discord.js": "^14.19.2",
     "dotenv": "^16.5.0"
   }
