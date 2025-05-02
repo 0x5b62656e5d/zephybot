@@ -62,7 +62,9 @@ const loadDatabase = (): DatabaseType => {
         CREATE TABLE IF NOT EXISTS todo (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             hash TEXT NOT NULL UNIQUE,
-            messageId TEXT NOT NULL UNIQUE
+            messageId TEXT NOT NULL UNIQUE,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL
         );
     `);
 
@@ -70,7 +72,9 @@ const loadDatabase = (): DatabaseType => {
         .prepare(`SELECT 1 FROM todo WHERE hash = ? AND messageId = ?`)
         .get("testhash", "12345");
     if (!exists) {
-        db.prepare(`INSERT INTO todo (hash, messageId) VALUES (?, ?)`).run("testhash", "12345");
+        db.prepare(
+            `INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`
+        ).run("testhash", "12345", "Test", "Test description");
     }
 
     const rows = db.prepare(`SELECT * FROM todo`).all();

@@ -23,4 +23,6 @@ test('Database row retrieval', () => {
     expect(row).toBeDefined();
     expect(row.hash).toBe("testhash");
     expect(row.messageId).toBe("12345");
+    expect(row.title).toBe("Test");
+    expect(row.description).toBe("Test description");
 });
