@@ -1,0 +1,40 @@
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    CommandInteraction,
+    CommandInteractionOptionResolver,
+    MessageActionRowComponentBuilder,
+    SlashCommandBuilder,
+} from "discord.js";
+
+const string = "";
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName("template")
+        .setDescription("Template description")
+        .addStringOption(option => option.setName("template").setDescription("Template description")),
+    async execute(interaction: CommandInteraction) {
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel("Delete")
+            .setStyle(ButtonStyle.Danger);
+
+        const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
+
+        const template = (interaction.options as CommandInteractionOptionResolver).getUser("template");
+
+        if (template) {
+            return interaction.reply({
+                content: `${template}\n${string}`,
+                components: [row],
+            });
+        }
+
+        interaction.reply({
+            content: `${string}`,
+            components: [row],
+        });
+    },
+};
