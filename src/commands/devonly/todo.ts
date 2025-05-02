@@ -16,7 +16,10 @@ module.exports = {
         .setName("todo")
         .setDescription("Add a todo item")
         .addStringOption(option =>
-            option.setName("todo").setDescription("The todo item to add").setRequired(true)
+            option.setName("name").setDescription("The name of todo to add").setRequired(true)
+        )
+        .addStringOption(option =>
+            option.setName("description").setDescription("The description of the todo").setRequired(true)
         ),
     async execute(interaction: CommandInteraction) {
         if (interaction.user.id !== process.env.DEV_USER_ID) {
@@ -26,11 +29,17 @@ module.exports = {
             });
         }
 
-        const todo = (interaction.options as CommandInteractionOptionResolver).getString("todo");
+        const name = (interaction.options as CommandInteractionOptionResolver).getString("name");
+        const description = (interaction.options as CommandInteractionOptionResolver).getString("description");
 
-        if (!todo) {
+        if (!name) {
             return interaction.reply({
-                content: "Please provide a todo item.",
+                content: "Please provide a todo name.",
+                flags: MessageFlags.Ephemeral,
+            });
+        } else if (!description) {
+            return interaction.reply({
+                content: "Please provide a todo description.",
                 flags: MessageFlags.Ephemeral,
             });
         }
@@ -48,7 +57,7 @@ module.exports = {
                 const hash = getHash();
 
                 const reply = await (channel as DMChannel).send({
-                    content: `Todo item: ${todo}\nTodo hash: ${hash}`,
+                    content: `# ${name}\n${description}\n-# ${hash}`,
                 });
 
                 interaction.reply({
@@ -56,8 +65,8 @@ module.exports = {
                     flags: MessageFlags.Ephemeral,
                 });
 
-                const query = database.prepare(`INSERT INTO todo (hash, messageId) VALUES (?, ?)`);
-                query.run(hash, reply.id);
+                const query = database.prepare(`INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`);
+                query.run(hash, reply.id, name, description);
             })
             .catch(error => console.error(`[ERROR] todo.ts\n${error}`));
     },
