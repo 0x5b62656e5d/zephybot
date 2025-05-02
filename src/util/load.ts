@@ -54,9 +54,7 @@ const loadCommandsRecursively = (client: CommandClient, directory: string) => {
 };
 
 const loadDatabase = (): DatabaseType => {
-    const db = new Database(
-        `data/${(process.env.MODE as string) === "DEVELOPMENT" ? "test" : "database"}.sqlite`
-    );
+    const db = new Database("data/database.sqlite");
 
     db.exec(`
         CREATE TABLE IF NOT EXISTS todo (
