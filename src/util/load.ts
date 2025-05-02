@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { CommandClient } from "../wrappers/CommandClient";
 
-function loadEventsRecursively(client: CommandClient, directory: string) {
+const loadEventsRecursively = (client: CommandClient, directory: string) => {
     const entries = fs.readdirSync(directory, { withFileTypes: true });
 
     for (const entry of entries) {
@@ -18,6 +18,7 @@ function loadEventsRecursively(client: CommandClient, directory: string) {
                 } else {
                     client.on(event.name, (...args) => event.execute(...args));
                 }
+                console.info(`[INFO] Loaded event: ${event.name}`);
             } else {
                 console.warn(
                     `[WARNING] Event at ${fullPath} is missing a required "name" or "execute" property.`
@@ -25,9 +26,9 @@ function loadEventsRecursively(client: CommandClient, directory: string) {
             }
         }
     }
-}
+};
 
-function loadCommandsRecursively(client: CommandClient, directory: string) {
+const loadCommandsRecursively = (client: CommandClient, directory: string) => {
     const entries = fs.readdirSync(directory, { withFileTypes: true });
 
     for (const entry of entries) {
@@ -41,7 +42,7 @@ function loadCommandsRecursively(client: CommandClient, directory: string) {
             if ("data" in command && "execute" in command) {
                 client.commands.set(command.data.name, command);
                 client.commandList.push(command.data.toJSON());
-                console.log(typeof command.data.toJSON());
+                console.info(`[INFO] Loaded command: ${command.data.name}`);
             } else {
                 console.warn(
                     `[WARNING] The command at ${entryPath} is missing a required "data" or "execute" property.`
@@ -49,6 +50,6 @@ function loadCommandsRecursively(client: CommandClient, directory: string) {
             }
         }
     }
-}
+};
 
 export { loadEventsRecursively, loadCommandsRecursively };

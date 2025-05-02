@@ -21,8 +21,8 @@ const client = new CommandClient({
 
 client.commands = new Collection();
 
-loadCommandsRecursively(client, path.join(__dirname, 'commands'));
-loadEventsRecursively(client, path.join(__dirname, 'events'));
+loadCommandsRecursively(client, path.join(__dirname, "commands"));
+loadEventsRecursively(client, path.join(__dirname, "events"));
 registerCommands(client, process.env.TOKEN as string, process.env.APPLICATION_ID as string);
 
 client.login(process.env.TOKEN);
