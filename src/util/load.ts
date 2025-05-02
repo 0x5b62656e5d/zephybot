@@ -53,8 +53,8 @@ const loadCommandsRecursively = (client: CommandClient, directory: string) => {
     }
 };
 
-const loadDatabase = (): DatabaseType => {
-    const db = new Database("data/database.sqlite");
+const loadDatabase = (databasePath: string): DatabaseType => {
+    const db = new Database(databasePath);
 
     db.exec(`
         CREATE TABLE IF NOT EXISTS todo (
@@ -65,15 +65,6 @@ const loadDatabase = (): DatabaseType => {
             description TEXT NOT NULL
         );
     `);
-
-    const exists = db
-        .prepare(`SELECT 1 FROM todo WHERE hash = ? AND messageId = ?`)
-        .get("testhash", "12345");
-    if (!exists) {
-        db.prepare(
-            `INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`
-        ).run("testhash", "12345", "Test", "Test description");
-    }
 
     const rows = db.prepare(`SELECT * FROM todo`).all();
 
