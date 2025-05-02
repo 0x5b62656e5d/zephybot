@@ -1,4 +1,5 @@
 import { Events, Interaction, MessageFlags, TextChannel } from "discord.js";
+import { handleMultipleErrors } from "../../util/handleMultipleErrors";
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -27,6 +28,8 @@ module.exports = {
                 return await message.delete();
             } catch (error) {
                 console.error("[ERROR] Failed to fetch channel: ", error);
+                handleMultipleErrors(error);
+
                 return interaction.reply({
                     content: `Failed perform this action`,
                     ephemeral: true,
