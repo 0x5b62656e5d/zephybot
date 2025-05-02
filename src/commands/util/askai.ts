@@ -1,0 +1,82 @@
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    CommandInteraction,
+    CommandInteractionOptionResolver,
+    Guild,
+    GuildMemberRoleManager,
+    MessageActionRowComponentBuilder,
+    MessageFlags,
+    SlashCommandBuilder,
+} from "discord.js";
+import { getGeminiResponse } from "../../util/genai";
+
+const roleIdForGemini = [
+    "1209991856868565033",
+    "1205633126512984154",
+    "1205275965945675817",
+    "759269276845604885",
+    "751116531345260546",
+];
+
+module.exports = {
+    data: new SlashCommandBuilder()
+        .setName("askai")
+        .setDescription("Ask AI a question")
+        .addStringOption(option =>
+            option.setName("prompt").setDescription("The question to ask").setRequired(true)
+        )
+        .addStringOption(option => option.setName("target").setDescription("The user to ping")),
+    async execute(interaction: CommandInteraction) {
+        if (!interaction.inGuild()) {
+            return interaction.reply({
+                content: "This command can only be used in a server.",
+                flags: MessageFlags.Ephemeral,
+            });
+        }
+
+        const roles = (interaction.member.roles as GuildMemberRoleManager).cache;
+
+        if (
+            !roles.some(role => roleIdForGemini.includes(role.id)) &&
+            interaction.user.id !== process.env.DEV_USER_ID
+        ) {
+            return interaction.reply({
+                content: "You are not allowed to use this command.",
+                flags: MessageFlags.Ephemeral,
+            });
+        }
+
+        const prompt = (interaction.options as CommandInteractionOptionResolver).getString("prompt");
+
+        await interaction.deferReply();
+
+        const response = await getGeminiResponse(prompt as string);
+
+        const delMsg = new ButtonBuilder()
+            .setCustomId(`delMsg.${interaction.user.id}`)
+            .setLabel("Delete")
+            .setStyle(ButtonStyle.Danger);
+
+        const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
+
+        const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
+
+        if (response) {
+            if (target) {
+                return await interaction.editReply({
+                    content: `*Suggestion for <@${target.id}>*\n\n> ${response.replace(/\n/g, '\n> ')}`,
+                    components: [row],
+                });
+            }
+
+            return await interaction.editReply({
+                content: `> ${response.replace(/\n/g, '\n> ')}`,
+                components: [row],
+            });
+        } else {
+            return await interaction.editReply("Sorry, I couldn't find an answer to your question.");
+        }
+    },
+};
