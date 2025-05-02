@@ -4,6 +4,7 @@ import path from "path";
 import { CommandClient } from "./wrappers/CommandClient";
 import { loadCommandsRecursively, loadDatabase, loadEventsRecursively } from "./util/load";
 import { registerCommands } from "./util/registerCommands";
+import { GoogleGenAI } from "@google/genai";
 
 dotenv({ path: path.join(__dirname, "..", ".env") });
 
@@ -26,6 +27,8 @@ loadEventsRecursively(client, path.join(__dirname, "events"));
 registerCommands(client, process.env.TOKEN as string, process.env.APPLICATION_ID as string);
 
 const db = loadDatabase();
+
+const gemini = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
 
 client.login(process.env.TOKEN);
 
