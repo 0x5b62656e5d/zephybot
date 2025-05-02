@@ -26,10 +26,12 @@ loadCommandsRecursively(client, path.join(__dirname, "commands"));
 loadEventsRecursively(client, path.join(__dirname, "events"));
 registerCommands(client, process.env.TOKEN as string, process.env.APPLICATION_ID as string);
 
+const commandsList = client.commands.map(command => command.data.toJSON());
+
 const db = loadDatabase("data/database.sqlite");
 
 const gemini = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
 
 client.login(process.env.TOKEN);
 
-export { db as database, gemini };
+export { db as database, gemini, commandsList };
