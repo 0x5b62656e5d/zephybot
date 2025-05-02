@@ -2,7 +2,7 @@ import { Collection, GatewayIntentBits, Partials } from "discord.js";
 import { config as dotenv } from "dotenv";
 import path from "path";
 import { CommandClient } from "./wrappers/CommandClient";
-import { loadCommandsRecursively, loadEventsRecursively } from "./util/load";
+import { loadCommandsRecursively, loadDatabase, loadEventsRecursively } from "./util/load";
 import { registerCommands } from "./util/registerCommands";
 
 dotenv({ path: path.join(__dirname, "..", ".env") });
@@ -25,4 +25,8 @@ loadCommandsRecursively(client, path.join(__dirname, "commands"));
 loadEventsRecursively(client, path.join(__dirname, "events"));
 registerCommands(client, process.env.TOKEN as string, process.env.APPLICATION_ID as string);
 
+const db = loadDatabase();
+
 client.login(process.env.TOKEN);
+
+export { db as database, gemini };

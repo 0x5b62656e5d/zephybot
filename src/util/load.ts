@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { CommandClient } from "../wrappers/CommandClient";
+import Database, { type Database as DatabaseType } from "better-sqlite3";
 
 const loadEventsRecursively = (client: CommandClient, directory: string) => {
     const entries = fs.readdirSync(directory, { withFileTypes: true });
@@ -52,4 +53,34 @@ const loadCommandsRecursively = (client: CommandClient, directory: string) => {
     }
 };
 
-export { loadEventsRecursively, loadCommandsRecursively };
+const loadDatabase = (): DatabaseType => {
+    const db = new Database(
+        `data/${(process.env.MODE as string) === "DEVELOPMENT" ? "test" : "database"}.sqlite`
+    );
+
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS todo (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            hash TEXT NOT NULL UNIQUE,
+            messageId TEXT NOT NULL UNIQUE
+        );
+    `);
+
+    const exists = db
+        .prepare(`SELECT 1 FROM todo WHERE hash = ? AND messageId = ?`)
+        .get("testhash", "12345");
+    if (!exists) {
+        db.prepare(`INSERT INTO todo (hash, messageId) VALUES (?, ?)`).run("testhash", "12345");
+    }
+
+    const rows = db.prepare(`SELECT * FROM todo`).all();
+
+    console.info("[INFO] Todo database loaded:");
+    for (const row of rows) {
+        console.info(row);
+    }
+
+    return db;
+};
+
+export { loadCommandsRecursively, loadDatabase, loadEventsRecursively };
