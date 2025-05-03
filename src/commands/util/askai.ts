@@ -48,7 +48,9 @@ module.exports = {
             });
         }
 
-        const prompt = (interaction.options as CommandInteractionOptionResolver).getString("prompt");
+        const prompt = (interaction.options as CommandInteractionOptionResolver).getString(
+            "prompt"
+        );
 
         await interaction.deferReply();
 
@@ -64,19 +66,56 @@ module.exports = {
         const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
 
         if (response) {
-            if (target) {
+            try {
+                if (target) {
+                    return await interaction.editReply({
+                        content: `*Suggestion for <@${target.id}>*\n\n> ${response.replace(
+                            /\n/g,
+                            "\n> "
+                        )}`,
+                        components: [row],
+                    });
+                }
+
                 return await interaction.editReply({
-                    content: `*Suggestion for <@${target.id}>*\n\n> ${response.replace(/\n/g, '\n> ')}`,
+                    content: `> ${response.replace(/\n/g, "\n> ")}`,
+                    components: [row],
+                });
+            } catch (error: any) {
+                let shortenedResponse: string = "";
+
+                if (error && typeof error === "object" && "code" in error && error.code === 50035) {
+                    shortenedResponse = (await getGeminiResponse(
+                        ("Your previous response was too long. Please shorten it to less than 1500 characters. Here was the original prompt: " +
+                            prompt) as string
+                    )) as string;
+                }
+
+                if (!shortenedResponse) {
+                    return await interaction.editReply(
+                        "Sorry, I couldn't find an answer to your question."
+                    );
+                }
+
+                if (target) {
+                    return await interaction.editReply({
+                        content: `*Suggestion for <@${target.id}>*\n\n> ${shortenedResponse.replace(
+                            /\n/g,
+                            "\n> "
+                        )}`,
+                        components: [row],
+                    });
+                }
+
+                return await interaction.editReply({
+                    content: `> ${shortenedResponse.replace(/\n/g, "\n> ")}`,
                     components: [row],
                 });
             }
-
-            return await interaction.editReply({
-                content: `> ${response.replace(/\n/g, '\n> ')}`,
-                components: [row],
-            });
         } else {
-            return await interaction.editReply("Sorry, I couldn't find an answer to your question.");
+            return await interaction.editReply(
+                "Sorry, I couldn't find an answer to your question."
+            );
         }
     },
 };
