@@ -5,8 +5,11 @@ import { CommandClient } from "./wrappers/CommandClient";
 import { loadCommandsRecursively, loadDatabase, loadEventsRecursively } from "./util/load";
 import { registerCommands } from "./util/registerCommands";
 import { GoogleGenAI } from "@google/genai";
+import { loadLogger } from "./util/logger";
 
 dotenv({ path: path.join(__dirname, "..", ".env") });
+
+loadLogger();
 
 const client = new CommandClient({
     intents: [
