@@ -1,13 +1,13 @@
 import fs from "fs";
 import path from "path";
-import rfs from "rotating-file-stream";
+import { createStream } from 'rotating-file-stream';
 
 const logDir = path.resolve(__dirname, "../logs");
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
 }
 
-const logStream = rfs.createStream("output.log", {
+const logStream = createStream("output.log", {
     interval: "1d",
     path: logDir,
     maxFiles: 7,
