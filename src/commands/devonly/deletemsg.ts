@@ -23,7 +23,7 @@ module.exports = {
         }
 
         const messageId = (interaction.options as CommandInteractionOptionResolver).getString(
-            "messageId"
+            "messageid"
         );
 
         if (!messageId) {
