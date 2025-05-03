@@ -3,6 +3,7 @@ import { CommandClient } from '../wrappers/CommandClient';
 
 module.exports = {
 	name: Events.ClientReady,
+	eventTitle: "Client ready",
 	once: true,
 	execute(client: CommandClient) {
 		if (client.user) {

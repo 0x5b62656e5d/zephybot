@@ -19,7 +19,7 @@ const loadEventsRecursively = (client: CommandClient, directory: string) => {
                 } else {
                     client.on(event.name, (...args) => event.execute(...args));
                 }
-                console.info(`[INFO] Loaded event: ${event.name}`);
+                console.info(`[INFO] Loaded event: ${event.eventTitle}`);
             } else {
                 console.warn(
                     `[WARNING] Event at ${fullPath} is missing a required "name" or "execute" property.`

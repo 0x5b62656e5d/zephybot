@@ -3,6 +3,7 @@ import { handleMultipleErrors } from "../../util/handleMultipleErrors";
 
 module.exports = {
     name: Events.InteractionCreate,
+    eventTitle: "Bot interaction creation",
     async execute(interaction: Interaction) {
         if (!interaction.isChatInputCommand()) {
             return;

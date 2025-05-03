@@ -3,6 +3,7 @@ import { handleMultipleErrors } from "../../util/handleMultipleErrors";
 
 module.exports = {
     name: Events.InteractionCreate,
+    eventTitle: "Delete message button interaction",
     async execute(interaction: Interaction) {
         if (!interaction.isButton()) {
             return;

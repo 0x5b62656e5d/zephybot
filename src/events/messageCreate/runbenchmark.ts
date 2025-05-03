@@ -7,6 +7,7 @@ const string =
 
 module.exports = {
     name: Events.MessageCreate,
+    eventTitle: "Benchmark request",
     async execute(message: Message) {
         if (message.author.bot) {
             return;
