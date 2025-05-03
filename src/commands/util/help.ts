@@ -52,7 +52,7 @@ module.exports = {
             await interaction.deferReply();
             await EmbedPagination(interaction, embedPages, 30 * 1000, [row]);
         } catch (error) {
-            console.error(`[ERROR] help.ts\n${error}`);
+            console.error(`help.ts\n${error}`);
             await interaction.editReply({
                 content: "An error occurred while sending the help command.",
                 components: [],

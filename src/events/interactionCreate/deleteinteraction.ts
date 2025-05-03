@@ -28,7 +28,7 @@ module.exports = {
                 const message = await channel.messages.fetch(interaction.message.id);
                 return await message.delete();
             } catch (error) {
-                console.error("[ERROR] Failed to fetch channel: ", error);
+                console.error("Failed to fetch channel: ", error);
                 handleMultipleErrors(error);
 
                 return interaction.reply({

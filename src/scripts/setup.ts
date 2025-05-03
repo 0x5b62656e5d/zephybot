@@ -5,5 +5,5 @@ const dataDir = path.join(process.cwd(), "data");
 
 if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir);
-    console.info("[INFO] Created data directory");
+    console.info("Created data directory");
 }

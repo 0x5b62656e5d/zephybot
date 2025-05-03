@@ -1,4 +1,3 @@
-import { customAlphabet } from "nanoid";
 import {
     ChannelType,
     CommandInteraction,
@@ -7,6 +6,7 @@ import {
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
+import { customAlphabet } from "nanoid";
 import { database } from "../../index";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
@@ -68,6 +68,6 @@ module.exports = {
                 const query = database.prepare(`INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`);
                 query.run(hash, reply.id, name, description);
             })
-            .catch(error => console.error(`[ERROR] todo.ts\n${error}`));
+            .catch(error => console.error(`todo.ts\n${error}`));
     },
 };

@@ -14,14 +14,14 @@ module.exports = {
         ).commands.get(interaction.commandName);
 
         if (!command) {
-            console.error(`[ERROR] No command matching ${interaction.commandName} was found.`);
+            console.error(`No command matching ${interaction.commandName} was found.`);
             return;
         }
 
         try {
             await command.execute(interaction);
         } catch (error) {
-            console.error(`[ERROR] interactions.ts\n${error}`);
+            console.error(`interactions.ts\n${error}`);
             handleMultipleErrors(error);
 
             if (interaction.replied || interaction.deferred) {

@@ -17,7 +17,7 @@ const getGeminiResponse = async (prompt: string): Promise<string | null> => {
 
         return res.text?.trim() as string;
     } catch (error) {
-        console.error(`[ERROR] getGeminiResponse.ts\n${error}`);
+        console.error(`getGeminiResponse.ts\n${error}`);
         return null;
     }
 };

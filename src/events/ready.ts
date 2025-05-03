@@ -7,10 +7,10 @@ module.exports = {
 	once: true,
 	execute(client: CommandClient) {
 		if (client.user) {
-			console.info(`[INFO] Zephybot is awake :>`);
-			console.info(`[INFO] User tag: ${client.user.tag}`);
+			console.info(`Zephybot is awake :>`);
+			console.info(`User tag: ${client.user.tag}`);
 		} else {
-			console.error('[ERROR] Client user is null.');
+			console.error('Client user is null.');
 		}
 	},
 };

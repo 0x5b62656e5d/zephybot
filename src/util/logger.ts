@@ -23,7 +23,7 @@ const wrapConsoleMethod = (method: "log" | "info" | "warn" | "error") => {
 
         const timestamp = new Date().toISOString();
         logStream.write(`[${timestamp}] [${method.toUpperCase()}] ${output}\n`);
-        original(...args);
+        original(`[${method.toUpperCase()}]`, ...args);
     };
 };
 

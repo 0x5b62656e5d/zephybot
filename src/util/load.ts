@@ -1,7 +1,7 @@
+import Database, { type Database as DatabaseType } from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 import { CommandClient } from "../wrappers/CommandClient";
-import Database, { type Database as DatabaseType } from "better-sqlite3";
 
 const loadEventsRecursively = (client: CommandClient, directory: string) => {
     const entries = fs.readdirSync(directory, { withFileTypes: true });
@@ -19,7 +19,7 @@ const loadEventsRecursively = (client: CommandClient, directory: string) => {
                 } else {
                     client.on(event.name, (...args) => event.execute(...args));
                 }
-                console.info(`[INFO] Loaded event: ${event.eventTitle}`);
+                console.info(`Loaded event: ${event.eventTitle}`);
             } else {
                 console.warn(
                     `[WARNING] Event at ${fullPath} is missing a required "name" or "execute" property.`
@@ -43,7 +43,7 @@ const loadCommandsRecursively = (client: CommandClient, directory: string) => {
             if ("data" in command && "execute" in command) {
                 client.commands.set(command.data.name, command);
                 client.commandList.push(command.data.toJSON());
-                console.info(`[INFO] Loaded command: ${command.data.name}`);
+                console.info(`Loaded command: ${command.data.name}`);
             } else {
                 console.warn(
                     `[WARNING] The command at ${entryPath} is missing a required "data" or "execute" property.`
@@ -68,9 +68,9 @@ const loadDatabase = (databasePath: string): DatabaseType => {
 
     const rows = db.prepare(`SELECT * FROM todo`).all();
 
-    console.info("[INFO] Todo database loaded:");
+    console.info("Todo database loaded:");
     for (const row of rows) {
-        console.info(row);
+        console.log(row);
     }
 
     return db;

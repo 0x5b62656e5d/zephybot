@@ -55,7 +55,7 @@ module.exports = {
                         flags: MessageFlags.Ephemeral,
                     });
                 }).catch(error => {
-                    console.error(`[ERROR] complete.ts\n${error}`);
+                    console.error(`complete.ts\n${error}`);
 
                     return interaction.reply({
                         content: `Todo \`${todo.title}\` with message ID \`${todo.messageId}\` not found`,
@@ -63,6 +63,6 @@ module.exports = {
                     });
                 });
             })
-            .catch(error => console.error(`[ERROR] complete.ts\n${error}`));
+            .catch(error => console.error(`complete.ts\n${error}`));
     },
 };
