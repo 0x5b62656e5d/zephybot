@@ -4,9 +4,10 @@ services:
     container_name: zephybot
     restart: unless-stopped
     env_file: 
-      - ~/zephybot/.env
+      - ./.env
     volumes:
-      - ~/zephybot/logs:/app/logs
-      - ~/zephybot/data:/app/data
+      - ./logs:/app/logs
+      - ./data:/app/data
     build:
       context: .
+    network_mode: "host"
