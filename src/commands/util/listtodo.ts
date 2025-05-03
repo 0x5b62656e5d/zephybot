@@ -36,7 +36,7 @@ module.exports = {
             .setDescription("List of todos for the bot")
             .setAuthor({ name: "Zephybot", url: "https://github.com/0x5b62656e5d/zephybot" })
             .setThumbnail(zephybotPfp)
-            .addFields({ name: "Todos", value: todoList.join(" \n- ") })
+            .addFields({ name: "Todos", value: "- " + todoList.join(" \n- ") })
             .setTimestamp()
             .setFooter({ text: "Created by pepper", iconURL: pepperPfp });
 
