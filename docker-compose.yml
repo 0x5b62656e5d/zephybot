@@ -1,0 +1,12 @@
+services:
+  zephybot:
+    image: zephybot
+    container_name: zephybot
+    restart: unless-stopped
+    env_file: 
+      - ~/zephybot/.env
+    volumes:
+      - ~/zephybot/logs:/app/logs
+      - ~/zephybot/data:/app/data
+    build:
+      context: .
