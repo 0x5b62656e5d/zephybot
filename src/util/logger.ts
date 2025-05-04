@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { createStream } from 'rotating-file-stream';
+import { createStream } from "rotating-file-stream";
 
 const logDir = path.resolve(__dirname, "../../logs");
 if (!fs.existsSync(logDir)) {
