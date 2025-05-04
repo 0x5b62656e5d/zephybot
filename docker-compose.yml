@@ -10,4 +10,3 @@ services:
       - ./data:/app/data
     build:
       context: .
-    network_mode: "host"
