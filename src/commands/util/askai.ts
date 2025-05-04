@@ -78,7 +78,7 @@ module.exports = {
                 }
 
                 return await interaction.editReply({
-                    content: `> ${response.replace(/\n/g, "\n> ")}-# Note that Gemini is an AI model and can make mistakes.`,
+                    content: `> ${response.replace(/\n/g, "\n> ")}\n-# Note that Gemini is an AI model and can make mistakes.`,
                     components: [row],
                 });
             } catch (error: any) {
@@ -102,13 +102,13 @@ module.exports = {
                         content: `*Suggestion for <@${target.id}>*\n\n> ${shortenedResponse.replace(
                             /\n/g,
                             "\n> "
-                        )}-# Note that Gemini is an AI model and can make mistakes.`,
+                        )}\n-# Note that Gemini is an AI model and can make mistakes.`,
                         components: [row],
                     });
                 }
 
                 return await interaction.editReply({
-                    content: `> ${shortenedResponse.replace(/\n/g, "\n> ")}-# Note that Gemini is an AI model and can make mistakes.`,
+                    content: `> ${shortenedResponse.replace(/\n/g, "\n> ")}\n-# Note that Gemini is an AI model and can make mistakes.`,
                     components: [row],
                 });
             }
