@@ -7,7 +7,17 @@ if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
 }
 
-const logStream = createStream(`${new Date().toISOString()}.log`, {
+const createLogName = () => {
+    const date = new Date();
+    const month: string = (date.getMonth() + 1).toString();
+    const day: string = date.getDate().toString();
+
+    return `${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
+        day.length == 1 ? `0${day}` : day
+    }.log`;
+};
+
+const logStream = createStream(createLogName(), {
     interval: "1d",
     path: logDir,
     maxFiles: 7,
