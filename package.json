@@ -6,6 +6,7 @@
   "scripts": {
     "start": "rimraf dist/ && npx tsc && node --no-deprecation dist/index.js",
     "pretest": "ts-node src/scripts/setup.ts",
+    "posttest": "ts-node src/scripts/cleanup.ts",
     "test": "rimraf dist/ && npx tsc && npx jest --verbose",
     "build": "rimraf dist/ && npx tsc"
   },

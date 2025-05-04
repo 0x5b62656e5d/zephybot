@@ -1,8 +1,26 @@
 import { createLogName, loadLogger } from "../util/logger";
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, existsSync, unlinkSync } from "fs";
 import path from "path";
 
-loadLogger();
+beforeAll(async () => {
+    const logFile = path.resolve(__dirname, "../../logs", createLogName());
+
+    if (existsSync(logFile)) {
+        unlinkSync(logFile)
+    }
+
+    loadLogger();
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+});
+
+afterAll(() => {
+    const logFile = path.resolve(__dirname, "../../logs", createLogName());
+
+    if (existsSync(logFile)) {
+        unlinkSync(logFile);
+    }
+});
 
 describe("Logger tests", () => {
     test("Logger methods exist", () => {
@@ -16,20 +34,19 @@ describe("Logger tests", () => {
         expect(existsSync(path.resolve(__dirname, "../../logs"))).toBe(true);
     });
 
-    test("Log file is created", () => {
+    test("Log file is created", async () => {
+        await new Promise(resolve => setTimeout(resolve, 100));
+
         expect(existsSync(path.resolve(__dirname, "../../logs", createLogName()))).toBe(true);
     });
 
-    test("Log output format is correct", () => {
-        const logMock = jest.spyOn(console, "log").mockImplementation();
-        const infoMock = jest.spyOn(console, "info").mockImplementation();
-        const warnMock = jest.spyOn(console, "warn").mockImplementation();
-        const errorMock = jest.spyOn(console, "error").mockImplementation();
-
+    test("Log output format is correct", async () => {
         console.log("Test log");
         console.info("Test info");
         console.warn("Test warn");
         console.error("Test error");
+
+        await new Promise(resolve => setTimeout(resolve, 100));
 
         const logFile = path.resolve(__dirname, "../../logs", createLogName());
         const lines = readFileSync(logFile, "utf-8").split(/\r?\n/);
@@ -39,10 +56,5 @@ describe("Logger tests", () => {
                 /^\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z\] \[(LOG|INFO|WARN|ERROR)\] Test (log|info|warn|error)$/
             );
         }
-
-        logMock.mockRestore();
-        infoMock.mockRestore();
-        warnMock.mockRestore();
-        errorMock.mockRestore();
     });
 });

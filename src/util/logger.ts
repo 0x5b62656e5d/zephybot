@@ -12,7 +12,7 @@ const createLogName = () => {
     const month: string = (date.getMonth() + 1).toString();
     const day: string = date.getDate().toString();
 
-    return `${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
+    return `${process.env.JEST_WORKER_ID !== undefined ? `${process.env.JEST_WORKER_ID}test-` : ""}${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
         day.length == 1 ? `0${day}` : day
     }.log`;
 };
