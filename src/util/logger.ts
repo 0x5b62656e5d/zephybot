@@ -37,9 +37,11 @@ const wrapConsoleMethod = (method: "log" | "info" | "warn" | "error") => {
     };
 };
 
-export const loadLogger = () => {
+const loadLogger = () => {
     wrapConsoleMethod("log");
     wrapConsoleMethod("info");
     wrapConsoleMethod("warn");
     wrapConsoleMethod("error");
 };
+
+export { loadLogger, createLogName };
