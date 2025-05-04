@@ -8,7 +8,7 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 
-const string = "# NVRAM Reset\n\nThe laptop should be ***powered off*** and with ***all*** external devices unplugged to begin with. Hold power button for around 30 seconds. The laptop should turn on very briefly then shut off right after. Release the power button then boot the laptop.";
+const string = "# NVRAM Reset\n\nThe laptop should be ***powered off*** and with ***all*** external devices and power sources unplugged to begin with. Hold power button for around 30 seconds. The laptop should turn on very briefly then shut off right after. Release the power button then boot the laptop.";
 
 module.exports = {
     data: new SlashCommandBuilder()

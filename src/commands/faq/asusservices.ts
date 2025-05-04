@@ -8,7 +8,7 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 
-const string = "# Asus services\n\nQ: *I ran the uninstaller but when I press M4/ROG, AC still pops up*\nA: Reboot then try again. If that doesn't work, open G-Helper, go to the `Extras` menu, and at the bottom, stop Asus services.";
+const string = "# Asus services\n\nQ: *I ran the uninstaller but when I press M4/ROG, AC still pops up*\nA: Reboot then try again. If that doesn't work, open G-Helper, go to the `Extras` menu, and at the bottom, stop Asus services.\n\nNote that these services may appear after certain Windows updates. Periodically check for any Asus services running every month or so in GHelper and stop them accordingly";
 
 module.exports = {
     data: new SlashCommandBuilder()
