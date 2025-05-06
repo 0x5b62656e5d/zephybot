@@ -2,7 +2,7 @@ import { Collection, GatewayIntentBits, Partials } from "discord.js";
 import { config as dotenv } from "dotenv";
 import path from "path";
 import { CommandClient } from "./wrappers/CommandClient";
-import { loadCommandsRecursively, loadDatabase, loadEventsRecursively } from "./util/load";
+import { loadCommandsRecursively, loadEventsRecursively } from "./util/load";
 import { registerCommands } from "./util/registerCommands";
 import { GoogleGenAI } from "@google/genai";
 import { loadLogger } from "./util/logger";
@@ -30,10 +30,8 @@ registerCommands(client, config.bot.TOKEN, config.bot.APPLICATION_ID);
 
 const commandsList = client.commands.map(command => command.data.toJSON());
 
-const db = loadDatabase("data/database.sqlite");
-
 const gemini = new GoogleGenAI({ apiKey: config.apiKeys.GEMINI });
 
 client.login(config.bot.TOKEN);
 
-export { db as database, gemini, commandsList };
+export { gemini, commandsList };

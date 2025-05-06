@@ -1,13 +1,10 @@
 import { type Database as DatabaseType } from "better-sqlite3";
 import { existsSync, unlinkSync } from "fs";
-import { loadDatabase } from "../util/load";
 import { TodoDatabase } from "../wrappers/types/TodoDatabase";
-
-const databasePath = "data/test.sqlite";
-
-const database = loadDatabase(databasePath);
+import config from "../util/config";
 
 ((database: DatabaseType) => {
+    console.log(typeof database);
     const exists = database
         .prepare(`SELECT 1 FROM todo WHERE hash = ? AND messageId = ?`)
         .get("testhash", "12345");
@@ -16,30 +13,29 @@ const database = loadDatabase(databasePath);
             .prepare(`INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`)
             .run("testhash", "12345", "Test", "Test description");
     }
-})(database);
+})(config.database.database);
 
 describe("Database tests", () => {
     test("Database connection", () => {
-        expect(database).toBeDefined();
+        expect(config.database).toBeDefined();
     });
 
     test("Database table creation", () => {
-        const db = database;
-        const exists = db
+        const exists = config.database.database
             .prepare(`SELECT name FROM sqlite_master WHERE type='table' AND name='todo'`)
             .get();
         expect(exists).toBeDefined();
     });
 
     test("Database row insertion", () => {
-        const exists = database
+        const exists = config.database.database
             .prepare(`SELECT 1 FROM todo WHERE hash = ? AND messageId = ?`)
             .get("testhash", "12345");
         expect(exists).toBeDefined();
     });
 
     test("Database row retrieval", () => {
-        const row = database
+        const row = config.database.database
             .prepare(`SELECT * FROM todo WHERE hash = ? AND messageId = ?`)
             .get("testhash", "12345") as TodoDatabase;
         expect(row).toBeDefined();
@@ -48,8 +44,8 @@ describe("Database tests", () => {
         expect(row.title).toBe("Test");
         expect(row.description).toBe("Test description");
     });
-
-    if (existsSync(databasePath)) {
-        unlinkSync(databasePath);
-    }
 });
+
+// if (existsSync(config.database.path)) {
+//     unlinkSync(config.database.path);
+// }

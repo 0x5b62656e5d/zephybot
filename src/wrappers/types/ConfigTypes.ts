@@ -1,8 +1,11 @@
+import { Database as DatabaseType } from "better-sqlite3";
+
 interface Config {
     bot: BotConfig;
     apiKeys: ApiKeys;
     database: DatabaseConfig;
-};
+    logger: LoggerConfig;
+}
 
 interface BotConfig {
     TOKEN: string;
@@ -13,7 +16,7 @@ interface BotConfig {
     DM_CHANNEL_ID: string;
     AI_ROLES: string[];
     commands: CommandConfig;
-};
+}
 
 interface CommandConfig {
     COMMANDS_PER_HELP_PAGE: number;
@@ -24,11 +27,7 @@ interface CommandConfig {
 
 interface ApiKeys {
     GEMINI: string;
-};
-
-interface DatabaseConfig {
-    path: string;
-};
+}
 
 interface CommandEntry {
     name: string;
@@ -43,4 +42,13 @@ interface CommandOptions {
     required: boolean;
 }
 
-export { Config, BotConfig, ApiKeys, DatabaseConfig };
+interface DatabaseConfig {
+    path: string;
+    database: DatabaseType;
+}
+
+interface LoggerConfig {
+    path: string;
+}
+
+export { Config, BotConfig, ApiKeys, DatabaseConfig, LoggerConfig };

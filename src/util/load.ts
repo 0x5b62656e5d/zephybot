@@ -1,4 +1,3 @@
-import Database, { type Database as DatabaseType } from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 import { CommandClient } from "../wrappers/CommandClient";
@@ -53,27 +52,4 @@ const loadCommandsRecursively = (client: CommandClient, directory: string) => {
     }
 };
 
-const loadDatabase = (databasePath: string): DatabaseType => {
-    const db = new Database(databasePath);
-
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS todo (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            hash TEXT NOT NULL UNIQUE,
-            messageId TEXT NOT NULL UNIQUE,
-            title TEXT NOT NULL,
-            description TEXT NOT NULL
-        );
-    `);
-
-    const rows = db.prepare(`SELECT * FROM todo`).all();
-
-    console.info("Todo database loaded:");
-    for (const row of rows) {
-        console.log(row);
-    }
-
-    return db;
-};
-
-export { loadCommandsRecursively, loadDatabase, loadEventsRecursively };
+export { loadCommandsRecursively, loadEventsRecursively };

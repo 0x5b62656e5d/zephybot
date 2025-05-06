@@ -4,10 +4,10 @@ import {
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
-import { database } from "../../index";
 import { TodoDatabase } from "../../wrappers/types/TodoDatabase";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
+import { queryByHash, deleteEntry } from "../../util/database";
 
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
@@ -40,9 +40,7 @@ module.exports = {
             });
         }
 
-        const todo = database
-            .prepare(`SELECT * FROM todo WHERE hash = ?`)
-            .get(hash) as TodoDatabase;
+        const todo = queryByHash(hash);
 
         if (!todo) {
             return interaction.reply({
@@ -51,7 +49,7 @@ module.exports = {
             });
         }
 
-        database.prepare(`DELETE FROM todo WHERE hash = ?`).run(hash);
+        deleteEntry(hash);
         interaction.reply({
             content: `Todo \`${todo.title}\` with hash \`${hash}\` completed!`,
             flags: MessageFlags.Ephemeral,

@@ -7,9 +7,9 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 import { customAlphabet } from "nanoid";
-import { database } from "../../index";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
+import { insertEntry } from "../../util/database";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
 
@@ -79,10 +79,7 @@ module.exports = {
                     flags: MessageFlags.Ephemeral,
                 });
 
-                const query = database.prepare(
-                    `INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`
-                );
-                query.run(hash, reply.id, name, description);
+                insertEntry(hash, reply.id, name, description);
             })
             .catch(error => console.error(`todo.ts\n${error}`));
     },

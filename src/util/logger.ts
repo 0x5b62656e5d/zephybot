@@ -6,14 +6,16 @@ const createLogName = () => {
     const month: string = (date.getMonth() + 1).toString();
     const day: string = date.getDate().toString();
 
-    return `${process.env.JEST_WORKER_ID ? `${process.env.JEST_WORKER_ID}test-` : ""}${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
+    return `${
+        process.env.JEST_WORKER_ID ? `${process.env.JEST_WORKER_ID}-test-` : ""
+    }${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
         day.length == 1 ? `0${day}` : day
     }.log`;
 };
 
 const logStream = createStream(createLogName(), {
     interval: "1d",
-    path: config.database.path,
+    path: config.logger.path,
     maxFiles: 7,
 });
 
