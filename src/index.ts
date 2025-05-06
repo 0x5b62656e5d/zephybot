@@ -6,8 +6,7 @@ import { loadCommandsRecursively, loadDatabase, loadEventsRecursively } from "./
 import { registerCommands } from "./util/registerCommands";
 import { GoogleGenAI } from "@google/genai";
 import { loadLogger } from "./util/logger";
-
-dotenv({ path: path.join(__dirname, "..", ".env") });
+import config from "./util/config";
 
 loadLogger();
 
@@ -27,14 +26,14 @@ client.commands = new Collection();
 
 loadCommandsRecursively(client, path.join(__dirname, "commands"));
 loadEventsRecursively(client, path.join(__dirname, "events"));
-registerCommands(client, process.env.TOKEN as string, process.env.APPLICATION_ID as string);
+registerCommands(client, config.bot.TOKEN, config.bot.APPLICATION_ID);
 
 const commandsList = client.commands.map(command => command.data.toJSON());
 
 const db = loadDatabase("data/database.sqlite");
 
-const gemini = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
+const gemini = new GoogleGenAI({ apiKey: config.apiKeys.GEMINI });
 
-client.login(process.env.TOKEN);
+client.login(config.bot.TOKEN);
 
 export { db as database, gemini, commandsList };

@@ -8,6 +8,7 @@ import {
 } from "discord.js";
 import { customAlphabet } from "nanoid";
 import { database } from "../../index";
+import config from "../../util/config";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
 
@@ -22,7 +23,7 @@ module.exports = {
             option.setName("description").setDescription("The description of the todo").setRequired(true)
         ),
     async execute(interaction: CommandInteraction) {
-        if (interaction.user.id !== process.env.DEV_USER_ID) {
+        if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
                 flags: MessageFlags.Ephemeral,
@@ -45,7 +46,7 @@ module.exports = {
         }
 
         interaction.client.channels
-            .fetch(process.env.DM_ID as string)
+            .fetch(config.bot.DM_CHANNEL_ID)
             .then(async channel => {
                 if (!channel || !channel.isTextBased() || channel.type !== ChannelType.DM) {
                     return interaction.reply({

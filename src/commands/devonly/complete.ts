@@ -7,6 +7,7 @@ import {
 } from "discord.js";
 import { database } from "../../index";
 import { TodoDatabase } from "../../wrappers/types/TodoDatabase";
+import config from "../../util/config";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -16,7 +17,7 @@ module.exports = {
             option.setName("hash").setDescription("The hash of the todo").setRequired(true)
         ),
     async execute(interaction: CommandInteraction) {
-        if (interaction.user.id !== process.env.DEV_USER_ID) {
+        if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
                 flags: MessageFlags.Ephemeral,
@@ -33,7 +34,7 @@ module.exports = {
         }
 
         interaction.client.channels
-            .fetch(process.env.DM_ID as string)
+            .fetch(config.bot.DM_CHANNEL_ID as string)
             .then(async channel => {
                 if (!channel || !channel.isTextBased() || channel.type !== ChannelType.DM) {
                     return interaction.reply({

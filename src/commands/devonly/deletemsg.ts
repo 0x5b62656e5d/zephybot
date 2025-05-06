@@ -4,6 +4,7 @@ import {
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
+import config from "../../util/config";
 
 const string = "";
 
@@ -15,7 +16,7 @@ module.exports = {
             option.setName("messageid").setDescription("The ID of the message").setRequired(true)
         ),
     async execute(interaction: CommandInteraction) {
-        if (interaction.user.id !== process.env.DEV_USER_ID) {
+        if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
                 flags: MessageFlags.Ephemeral,
@@ -36,7 +37,7 @@ module.exports = {
         interaction.channel?.messages
             .fetch(messageId)
             .then(async msg => {
-                if (msg.author.id !== process.env.BOT_USER_ID) {
+                if (msg.author.id !== config.bot.BOT_USER_ID) {
                     return interaction.reply({
                         content: `You can only delete messages sent by the bot.`,
                         flags: MessageFlags.Ephemeral,

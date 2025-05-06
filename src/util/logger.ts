@@ -1,25 +1,19 @@
-import fs from "fs";
-import path from "path";
 import { createStream } from "rotating-file-stream";
-
-const logDir = path.resolve(__dirname, "../../logs");
-if (!fs.existsSync(logDir)) {
-    fs.mkdirSync(logDir, { recursive: true });
-}
+import config from "./config";
 
 const createLogName = () => {
     const date = new Date();
     const month: string = (date.getMonth() + 1).toString();
     const day: string = date.getDate().toString();
 
-    return `${process.env.JEST_WORKER_ID !== undefined ? `${process.env.JEST_WORKER_ID}test-` : ""}${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
+    return `${process.env.JEST_WORKER_ID ? `${process.env.JEST_WORKER_ID}test-` : ""}${date.getFullYear()}-${month.length == 1 ? `0${month}` : month}-${
         day.length == 1 ? `0${day}` : day
     }.log`;
 };
 
 const logStream = createStream(createLogName(), {
     interval: "1d",
-    path: logDir,
+    path: config.database.path,
     maxFiles: 7,
 });
 

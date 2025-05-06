@@ -9,11 +9,9 @@ import {
 } from "discord.js";
 import { commandsList } from "../../index";
 import { EmbedPagination } from "../../util/embedpagination";
+import config from "../../util/config";
 
-const zephybotPfp = `https://cdn.discordapp.com/avatars/1151023270636818483/e0fb09065c262cd885289203bb4219f6.webp?size=1024&width=0&height=230`;
-const pepperPfp = `https://cdn.pepper.fyi/pfp.png`;
-
-const PAGES = 6;
+const cmdPerPage = config.bot.commands.COMMANDS_PER_HELP_PAGE;
 
 module.exports = {
     data: new SlashCommandBuilder().setName("help").setDescription("What commands are available?"),
@@ -29,7 +27,7 @@ module.exports = {
             return `**/${command.name}**\n${command.description}`;
         });
 
-        const totalPages = Math.ceil(commands.length / PAGES);
+        const totalPages = Math.ceil(commands.length / cmdPerPage);
         const embedPages = [];
 
         for (let i = 0; i < totalPages; i++) {
@@ -38,13 +36,13 @@ module.exports = {
                 .setTitle("Help")
                 .setDescription("List of commands for the bot")
                 .setAuthor({ name: "Zephybot", url: "https://github.com/0x5b62656e5d/zephybot" })
-                .setThumbnail(zephybotPfp)
+                .setThumbnail(config.bot.commands.BOT_PFP)
                 .addFields({
                     name: "Help",
-                    value: commands.slice(i * PAGES, i * PAGES + PAGES).join("\n\n"),
+                    value: commands.slice(i * cmdPerPage, i * cmdPerPage + cmdPerPage).join("\n\n"),
                 })
                 .setTimestamp()
-                .setFooter({ text: "Created by pepper", iconURL: pepperPfp });
+                .setFooter({ text: "Created by pepper", iconURL: config.bot.commands.DEV_PFP });
             embedPages.push(embed);
         }
 

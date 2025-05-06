@@ -11,14 +11,7 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 import { getGeminiResponse } from "../../util/genai";
-
-const roleIdForGemini = [
-    "1209991856868565033",
-    "1205633126512984154",
-    "1205275965945675817",
-    "759269276845604885",
-    "751116531345260546",
-];
+import config from "../../util/config";
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -39,8 +32,8 @@ module.exports = {
         const roles = (interaction.member.roles as GuildMemberRoleManager).cache;
 
         if (
-            !roles.some(role => roleIdForGemini.includes(role.id)) &&
-            interaction.user.id !== process.env.DEV_USER_ID
+            !roles.some(role => config.bot.AI_ROLES.includes(role.id)) &&
+            interaction.user.id !== config.bot.DEV_USER_ID
         ) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
