@@ -7,14 +7,21 @@ import {
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
+import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
-const string = "# Cooling pads\n\nQ: *What kind of cooling pads should I get?*\nA: IETS GT500/600 or Llano V12/13 is recommended over traditional fan blowers, because of how their designs incorporate sealing foam around the laptop. This helps prevent hot air from recirculating into the laptop as easily.";
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("coolingpads")
-        .setDescription("Cooling pad recommendations")
-        .addUserOption(option => option.setName("target").setDescription("The user to ping")),
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
+        .addUserOption(option =>
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
+        ),
     async execute(interaction: CommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
@@ -23,17 +30,19 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
+        const target = (interaction.options as CommandInteractionOptionResolver).getUser(
+            commandEntry.options[0].name
+        );
 
         if (target) {
             return interaction.reply({
-                content: `*Suggestion for <@${target.id}>*\n${string}`,
+                content: `*Suggestion for <@${target.id}>*\n${commandEntry.string}`,
                 components: [row],
             });
         }
 
         interaction.reply({
-            content: `${string}`,
+            content: `${commandEntry.string}`,
             components: [row],
         });
     },

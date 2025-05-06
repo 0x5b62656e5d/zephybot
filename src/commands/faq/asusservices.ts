@@ -7,14 +7,21 @@ import {
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
+import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
-const string = "# Asus services\n\nQ: *I ran the uninstaller but when I press M4/ROG, AC still pops up*\nA: Reboot then try again. If that doesn't work, open G-Helper, go to the `Extras` menu, and at the bottom, stop Asus services.\n\nNote that these services may appear after certain Windows updates. Periodically check for any Asus services running every month or so in GHelper and stop them accordingly";
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("asusservices")
-        .setDescription("Why does AC popup still appear after uninstallation?")
-        .addUserOption(option => option.setName("target").setDescription("The user to ping")),
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
+        .addUserOption(option =>
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
+        ),
     async execute(interaction: CommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
@@ -23,17 +30,19 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
+        const target = (interaction.options as CommandInteractionOptionResolver).getUser(
+            commandEntry.options[0].name
+        );
 
         if (target) {
             return interaction.reply({
-                content: `*Suggestion for <@${target.id}>*\n${string}`,
+                content: `*Suggestion for <@${target.id}>*\n${commandEntry.string}`,
                 components: [row],
             });
         }
 
         interaction.reply({
-            content: `${string}`,
+            content: `${commandEntry.string}`,
             components: [row],
         });
     },

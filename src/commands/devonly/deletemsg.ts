@@ -5,15 +5,21 @@ import {
     SlashCommandBuilder,
 } from "discord.js";
 import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
-const string = "";
+const fileName = getFileBaseName(__filename);
+
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("deletemsg")
-        .setDescription("Delete a message")
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
         .addStringOption(option =>
-            option.setName("messageid").setDescription("The ID of the message").setRequired(true)
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
         ),
     async execute(interaction: CommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
@@ -24,7 +30,7 @@ module.exports = {
         }
 
         const messageId = (interaction.options as CommandInteractionOptionResolver).getString(
-            "messageid"
+            commandEntry.options[0].name
         );
 
         if (!messageId) {

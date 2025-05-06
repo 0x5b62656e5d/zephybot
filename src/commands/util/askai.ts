@@ -12,15 +12,26 @@ import {
 } from "discord.js";
 import { getGeminiResponse } from "../../util/genai";
 import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
+
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("askai")
-        .setDescription("Ask AI a question")
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
         .addStringOption(option =>
-            option.setName("prompt").setDescription("The question to ask").setRequired(true)
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[1].description)
+                .setRequired(commandEntry.options[0].required)
         )
-        .addStringOption(option => option.setName("target").setDescription("The user to ping")),
+        .addStringOption(option =>
+            option
+                .setName(commandEntry.options[1].name)
+                .setDescription(commandEntry.options[1].description)
+                .setRequired(commandEntry.options[1].required)
+        ),
     async execute(interaction: CommandInteraction) {
         if (!interaction.inGuild()) {
             return interaction.reply({
@@ -56,7 +67,9 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
+        const target = (interaction.options as CommandInteractionOptionResolver).getUser(
+            commandEntry.options[1].name
+        );
 
         if (response) {
             try {
@@ -71,7 +84,10 @@ module.exports = {
                 }
 
                 return await interaction.editReply({
-                    content: `> ${response.replace(/\n/g, "\n> ")}\n-# Note that Gemini is an AI model and can make mistakes.`,
+                    content: `> ${response.replace(
+                        /\n/g,
+                        "\n> "
+                    )}\n-# Note that Gemini is an AI model and can make mistakes.`,
                     components: [row],
                 });
             } catch (error: any) {
@@ -101,7 +117,10 @@ module.exports = {
                 }
 
                 return await interaction.editReply({
-                    content: `> ${shortenedResponse.replace(/\n/g, "\n> ")}\n-# Note that Gemini is an AI model and can make mistakes.`,
+                    content: `> ${shortenedResponse.replace(
+                        /\n/g,
+                        "\n> "
+                    )}\n-# Note that Gemini is an AI model and can make mistakes.`,
                     components: [row],
                 });
             }

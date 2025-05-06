@@ -9,18 +9,29 @@ import {
 import { customAlphabet } from "nanoid";
 import { database } from "../../index";
 import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
 
+const fileName = getFileBaseName(__filename);
+
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
+
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("todo")
-        .setDescription("Add a todo item")
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
         .addStringOption(option =>
-            option.setName("name").setDescription("The name of todo to add").setRequired(true)
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
         )
         .addStringOption(option =>
-            option.setName("description").setDescription("The description of the todo").setRequired(true)
+            option
+                .setName(commandEntry.options[1].name)
+                .setDescription(commandEntry.options[1].description)
+                .setRequired(commandEntry.options[1].required)
         ),
     async execute(interaction: CommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
@@ -30,8 +41,12 @@ module.exports = {
             });
         }
 
-        const name = (interaction.options as CommandInteractionOptionResolver).getString("name");
-        const description = (interaction.options as CommandInteractionOptionResolver).getString("description");
+        const name = (interaction.options as CommandInteractionOptionResolver).getString(
+            commandEntry.options[0].name
+        );
+        const description = (interaction.options as CommandInteractionOptionResolver).getString(
+            commandEntry.options[1].name
+        );
 
         if (!name) {
             return interaction.reply({
@@ -66,7 +81,9 @@ module.exports = {
                     flags: MessageFlags.Ephemeral,
                 });
 
-                const query = database.prepare(`INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`);
+                const query = database.prepare(
+                    `INSERT INTO todo (hash, messageId, title, description) VALUES (?, ?, ?, ?)`
+                );
                 query.run(hash, reply.id, name, description);
             })
             .catch(error => console.error(`todo.ts\n${error}`));

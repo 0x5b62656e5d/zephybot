@@ -8,13 +8,21 @@ import {
 import { database } from "../../index";
 import { TodoDatabase } from "../../wrappers/types/TodoDatabase";
 import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
+
+const fileName = getFileBaseName(__filename);
+
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("deletetodo")
-        .setDescription("Manually delete a todo item")
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
         .addStringOption(option =>
-            option.setName("hash").setDescription("The hash of the todo").setRequired(true)
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
         ),
     async execute(interaction: CommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
@@ -24,7 +32,9 @@ module.exports = {
             });
         }
 
-        const hash = (interaction.options as CommandInteractionOptionResolver).getString("hash");
+        const hash = (interaction.options as CommandInteractionOptionResolver).getString(
+            commandEntry.options[0].name
+        );
 
         if (!hash) {
             return interaction.reply({
@@ -43,7 +53,7 @@ module.exports = {
                 flags: MessageFlags.Ephemeral,
             });
         }
-            
+
         database.prepare(`DELETE FROM todo WHERE hash = ?`).run(hash);
         interaction.reply({
             content: `Todo \`${todo.title}\` with hash \`${hash}\` completed!`,

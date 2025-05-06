@@ -7,14 +7,21 @@ import {
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
+import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
-const string = "# Disabling laptop boot sound\n\n### Easy way:\nIn G-Helper, open the `Extra` menu, and at the bottom, uncheck the `Boot Sound` option.\n### Complicated way:\nBoot into BIOS (While laptop is turing on from a shutdown or reboot, keep mashing the `F2` button until you enter BIOS). Press `F7` for `Advanced Mode`. Navigate to the `Boot` menu, then select an entry that has something like \"Animation post-logo configuration\" or something like that. You should see a boot sound option. Disable it, then save and reboot.";
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("bootsound")
-        .setDescription("How to disable boot sound")
-        .addUserOption(option => option.setName("target").setDescription("The user to ping")),
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
+        .addUserOption(option =>
+            option
+                .setName(commandEntry.options[0].name)
+                .setDescription(commandEntry.options[0].description)
+                .setRequired(commandEntry.options[0].required)
+        ),
     async execute(interaction: CommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
@@ -23,17 +30,19 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const target = (interaction.options as CommandInteractionOptionResolver).getUser("target");
+        const target = (interaction.options as CommandInteractionOptionResolver).getUser(
+            commandEntry.options[0].name
+        );
 
         if (target) {
             return interaction.reply({
-                content: `*Suggestion for <@${target.id}>*\n${string}`,
+                content: `*Suggestion for <@${target.id}>*\n${commandEntry.string}`,
                 components: [row],
             });
         }
 
         interaction.reply({
-            content: `${string}`,
+            content: `${commandEntry.string}`,
             components: [row],
         });
     },

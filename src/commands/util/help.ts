@@ -10,11 +10,14 @@ import {
 import { commandsList } from "../../index";
 import { EmbedPagination } from "../../util/embedpagination";
 import config from "../../util/config";
+import { getFileBaseName } from "../../util/filebasename";
 
 const cmdPerPage = config.bot.commands.COMMANDS_PER_HELP_PAGE;
 
+const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
+
 module.exports = {
-    data: new SlashCommandBuilder().setName("help").setDescription("What commands are available?"),
+    data: new SlashCommandBuilder().setName(commandEntry.name).setDescription(commandEntry.description),
     async execute(interaction: CommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
