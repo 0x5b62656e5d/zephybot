@@ -4,7 +4,9 @@ import path from "path";
 import { Config } from "../wrappers/types/ConfigTypes";
 import { existsSync, mkdirSync } from "fs";
 
-dotenv.config({ path: path.join(process.cwd(), ".env") });
+if (process.env.NODE_ENV !== "ci") {
+    dotenv.config({ path: path.join(process.cwd(), ".env") });
+}
 
 if (!process.env.TOKEN) {
     throw new Error("Environment Variable [ TOKEN ] is missing");

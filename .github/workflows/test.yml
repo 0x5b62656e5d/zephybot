@@ -13,6 +13,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+      DEV_GUILD_ID: ${{ secrets.DEV_GUILD_ID }}
+      DEV_USER_ID: ${{ secrets.DEV_USER_ID }}
+      APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+      DM_CHANNEL_ID: ${{ secrets.DM_CHANNEL_ID }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
