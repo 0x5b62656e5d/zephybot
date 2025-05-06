@@ -4,7 +4,6 @@ import {
     ButtonStyle,
     CommandInteraction,
     CommandInteractionOptionResolver,
-    Guild,
     GuildMemberRoleManager,
     MessageActionRowComponentBuilder,
     MessageFlags,

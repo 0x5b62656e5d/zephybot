@@ -13,8 +13,6 @@ import { getFileBaseName } from "../../util/filebasename";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
 
-const fileName = getFileBaseName(__filename);
-
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {

@@ -5,19 +5,17 @@ import {
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
-import { commandsList, database } from "../../index";
+import { database } from "../../index";
 import { TodoDatabase } from "../../wrappers/types/TodoDatabase";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
-
-const fileName = getFileBaseName(__filename);
 
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName(fileName)
-        .setDescription(config.bot.commands.COMMAND_MAP[fileName].description)
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description)
         .addStringOption(option =>
             option
                 .setName(commandEntry.options[0].name)

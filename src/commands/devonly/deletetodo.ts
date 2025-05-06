@@ -1,5 +1,4 @@
 import {
-    ChannelType,
     CommandInteraction,
     CommandInteractionOptionResolver,
     MessageFlags,
@@ -9,8 +8,6 @@ import { database } from "../../index";
 import { TodoDatabase } from "../../wrappers/types/TodoDatabase";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
-
-const fileName = getFileBaseName(__filename);
 
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
