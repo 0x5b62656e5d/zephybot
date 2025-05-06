@@ -1,0 +1,442 @@
+{
+    "complete": {
+        "name": "complete",
+        "description": "Complete a todo item",
+        "options": [
+            {
+                "name": "hash",
+                "description": "The hash of the todo",
+                "required": true
+            }
+        ]
+    },
+    "deletemsg": {
+        "name": "deletemsg",
+        "description": "Delete a message",
+        "options": [
+            {
+                "name": "messageid",
+                "description": "The ID of the message",
+                "required": true
+            }
+        ]
+    },
+    "deletetodo": {
+        "name": "deletetodo",
+        "description": "Manually delete a todo item",
+        "options": [
+            {
+                "name": "hash",
+                "description": "The hash of the todo",
+                "required": true
+            }
+        ]
+    },
+    "todo": {
+        "name": "todo",
+        "description": "Add a todo item",
+        "options": [
+            {
+                "name": "name",
+                "description": "The name of the todo",
+                "required": true
+            },
+            {
+                "name": "description",
+                "description": "The description of the todo",
+                "required": false
+            }
+        ]
+    },
+    "accessories": {
+        "name": "accessories",
+        "description": "Asus accessories link",
+        "string": "## Asus accessories\n<https://www.a-accessories.com>",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "ask": {
+        "name": "ask",
+        "description": "How to ask better questions",
+        "string": "https://dontasktoask.com",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "asusservices": {
+        "name": "asusservices",
+        "description": "Why does AC popup still appear after uninstallation?",
+        "string": "# Asus services\n\nQ: *I ran the uninstaller but when I press M4/ROG, AC still pops up*\nA: Reboot then try again. If that doesn't work, open G-Helper, go to the `Extras` menu, and at the bottom, stop Asus services.\n\nNote that these services may appear after certain Windows updates. Periodically check for any Asus services running every month or so in GHelper and stop them accordingly",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "basics": {
+        "name": "basics",
+        "description": "ROG/TUF basics",
+        "string": "# Basics\n\n1. Crate/MyAsus replacement\n    a) Replace Armory Crate ***and*** MyAsus with GHelper if you haven't already. (Refer to `/replacingac` and `/asusservices`)\n        I. Grab the ***official*** crate uninstaller from the [crate install page](<https://www.asus.com/supportonly/armoury%20crate/helpdesk_download/>) and run it. Make sure to reboot afterwards.\n        II. Uninstall MyAsus from control panel or the start menu.\n        III. Get G-Helper from <https://github.com/seerge/g-helper>.\n        IV. Go to the `Extras` menu in G-Helper and stop Asus services.\n2. Power modes\n    a) When on battery, use `Eco` GPU mode and `Silent` CPU mode\n    b) When plugged in, use `Optimized` GPU mode and `Balanced` CPU mode\n3. Power (Refer to `/battery`)\n    a) Try to use the barrel charger at all times. The USBC charger doesn't have bypass and can wear out the battery faster. (Refer to `Battery`)\n    b) If you're going to be always plugged in, set battery charge to 60%. If you're going to be moving around for school or work, set it to 80-85% (Battery chemistry: Li-ion batteries last longer when kept between 20-80%)",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "battery": {
+        "name": "battery",
+        "description": "Battery related questions",
+        "string": "# Battery\n\nQ: *How do I check my battery discharge rate?*\nA: To check discharge rates, grab GHelper from <https://github.com/seerge/g-helper/releases/latest>. Don't bother installing software like Batterybar. G-Helper already has discharge monitoring built into it. Refer to `/basics` for tips on increasing battery life.\n\nQ: *My battery wear is at 79%! What do I do?*\nA: The battery wear percentage value is not accurate, you shouldn't worry about it too much. This isn't G-Helper's fault, the sensor readings itself just aren't accurate.\n\nNote: Stay on barrel charger if you can. The Type-C PD does not have bypass. This means that all the power will have to go thru the battery before being delivered to the board, which can wear the battery out faster. The barrel charger doesn't need to go thru the battery, as it has bypass and goes directly to the board. ***However***, if you own a ROG Zephyrus 2024 model or newer, the Type-C PD will ***have*** bypass. But still, stay on the AC adapter for higher workloads. The laptop will still draw power from the battery if the Type-C PD can't provide enough power, even for laptops that have bypass.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "benchmarks": {
+        "name": "benchmarks",
+        "description": "List of common/recommended benchmark tools",
+        "string": "# Common benchmark tools\n\n### Basic (CPU & GPU)\n3DMark - <https://www.3dmark.com/> /  <https://store.steampowered.com/app/223850/3DMark/> (*Demo*)\n\n### More advanced benchmark tools\n\n- CPU\nAIDA64 - <https://www.aida64.com/downloads>\nCinebench - <https://www.maxon.net/en/downloads/>\n\n- GPU\nAIDA64 - <https://www.aida64.com/downloads>\nFurmark - <https://geeks3d.com/furmark/>\nHeaven, Valley, Superposition - <https://benchmark.unigine.com/>\n\n- Combined\nAIDA64 - <https://rentry.org/stresstest> (*How-to*)",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "bootsound": {
+        "name": "bootsound",
+        "description": "How to disable boot sound",
+        "string": "# Disabling laptop boot sound\n\n### Easy way:\nIn G-Helper, open the `Extra` menu, and at the bottom, uncheck the `Boot Sound` option.\n### Complicated way:\nBoot into BIOS (While laptop is turing on from a shutdown or reboot, keep mashing the `F2` button until you enter BIOS). Press `F7` for `Advanced Mode`. Navigate to the `Boot` menu, then select an entry that has something like \"Animation post-logo configuration\" or something like that. You should see a boot sound option. Disable it, then save and reboot.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "cleaning": {
+        "name": "cleaning",
+        "description": "How to clean laptop fans",
+        "string": "# Cleaning fans\n\nQ: *Do I need to unplug the battery when cleaning the fans?*\nA: No, you don't need to. Just shut down your laptop and clean it.\n\nQ: *What tools do I need?*\nA: A can of compressed air or an electric duster is fine. Just make sure to blow gently. Also, ***do not*** let the fans spin on its own. This can generate current and damage components. ***Do not*** use brushes either, being too rough will damage the fans.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "cleanstall": {
+        "name": "cleanstall",
+        "description": "Cleanstall guide",
+        "string": "# Cleanstall guide\n\n<https://hackmd.io/@0x5b62656e5d/SJtCtOAuC>",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "coolingpads": {
+        "name": "coolingpads",
+        "description": "Cooling pad recommendations",
+        "string": "# Cooling pads\n\nQ: *What kind of cooling pads should I get?*\nA: IETS GT500/600 or Llano V12/13 is recommended over traditional fan blowers, because of how their designs incorporate sealing foam around the laptop. This helps prevent hot air from recirculating into the laptop as easily.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "cpuboost": {
+        "name": "cpuboost",
+        "description": "What the boost modes mean",
+        "string": "# CPU boost modes\n\n- `Disabled` - Boost is off\n- `Enabled` - CPU boosts when needed\n- `Aggressive` - CPU boosts faster and more often\n- `Aggressive at Guaranteed` - CPU boosts when it can\n- `Efficient Enabled` - Boosts only when needed, but prioritizes saving power\n- `Efficient Aggressive` - Boosts more often than `Efficient Enabled`, but still tries to save power\n- `Efficient Aggressive At Guaranteed` - Boosts more aggressively than `Efficient Aggressive`, but still tries to save power\n\nIt's recommended to stay on efficient aggressive to maintain a balance between performance, temperatures, and battery life. Note that disabling boost in an attempt to lower temperatures may affect performance.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "displayio": {
+        "name": "displayio",
+        "description": "Display output ports",
+        "string": "# Display IO\n\nQ: *Which ports use dGPU and which ports use iGPU?*\n\n***HDMI*** - dGPU\n***Right USBC*** - dGPU\n***Left USBC*** - iGPU\n\nNote: 2021 and older Zephyrus models have different IO ports:\n***HDMI*** - iGPU\n***Left USBC*** - dGPU",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "drivers": {
+        "name": "drivers",
+        "description": "Where to get drivers",
+        "string": "# Drivers\n\nLet Windows updates take care of your drivers. Asus drivers can get pretty old, as they don't update them often. If you don't have internet access, use ethernet or plug your phone into your laptop for hotspot.\nFor graphics drivers, install them from their respective vendors.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "ghelper": {
+        "name": "ghelper",
+        "description": "GHelper link",
+        "string": "## GHelper link\n<https://github.com/seerge/g-helper>",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "gpu": {
+        "name": "gpu",
+        "description": "GPU drivers can't be updated",
+        "string": "# GPU\n\nQ: *Geforce experience says I'm not able to update my graphics drivers. Why?*\nA: Are you on eco GPU mode? If so, switch to optimized or standard in G-Helper.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "linux": {
+        "name": "linux",
+        "description": "Questions about linux",
+        "string": "# Linux\n\nQ: *I'm having issues in linux. What do I do?*\nA: The ROG community made a linux guide on <https://asus-linux.org>. If you can't find a fix there, head over to the ROG Linux discord or the Asus ROG subreddit.\n\nDiscord link: https://discord.gg/VK7FdjMrEP\nROG Reddit: <https://reddit.com/r/ASUSROG>",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "misccmds": {
+        "name": "misccmds",
+        "description": "Misc commands",
+        "string": "# Misc commands\n\nsfc: `sfc /scannow`\nThis command scans all protected system files and replaces any corrupted files with a cached copy. (Optional) Run the `DISM` command before running the `sfc` command.\n\nDISM: `DISM /online /cleanup-image /restorehealth` (Unless specified, just run the command with the `/restorehealth` flag. You don't need to run all 3 flags.)\n- `/restorehealth` option will automatically scan and repair common issues\n- `/scanhealth` option performs a more advanced scan to determine whether the image has any problems\n- `/checkhealth` option determines any corruptions inside the local Windows image (Does not perform any repairs)\n\n***Note: Make sure to run these commands in CMD with administrator privileges.***\n***Reboot after running either/both commands***",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "nvram": {
+        "name": "nvram",
+        "description": "How to reset NVRAM",
+        "string": "# NVRAM Reset\n\nThe laptop should be ***powered off*** and with ***all*** external devices and power sources unplugged to begin with. Hold power button for around 30 seconds. The laptop should turn on very briefly then shut off right after. Release the power button then boot the laptop.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "pciegen": {
+        "name": "pciegen",
+        "description": "PCIe backwards compatibility",
+        "string": "# PCIe compatability\n\nQ: *Can I install a Gen 4 PCIe SSD into my Gen 3 slot?*\nA: Yes, you can. However, the Gen 4 SSD will run at Gen 3 speeds.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "performance": {
+        "name": "performance",
+        "description": "Questions about laptop performance",
+        "string": "# Performance\n\nQ: *My laptop's slowing down. Why?*\nA:\n- Keep at least 25-30% of your drive free (if your drive has a capacity of 1TB, keep at least 250-300gb free)\n- Did you accidentally install malware? Perhaps an app that's eating up your resources? (Refer to `/cleanstall` if needed)\n\nQ: *Why is my FPS so low in games?*\nA:\n- You're running your games off of the iGPU. Open G-Helper, and select the `optimized` or `standard` (or `ultimate` if applicable) GPU mode.\n- You have disabled CPU boost in attempt to lengthen battery life. Open G-Helper and set CPU boost to `efficient aggressive` or `aggressive`.\n\nYou can also try reinstalling your graphics drivers from their respective vendors.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "powersettings": {
+        "name": "powersettings",
+        "description": "Should the power settings in GHelper need to be adjusted?",
+        "string": "# Power settings\n\nQ: *What power settings should I use? Are there any good ones?*\nA: There shouldn't be a need to adjust power settings in GHelper; the defaults work perfectly fine.\n\nQ: *But my laptop is too hot!!!*\nA: Refer to `/temps`. Unless your CPU is exceeding 98 and/or GPU exceeding 84-86, there's nothing to worry about.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "replacingac": {
+        "name": "replacingac",
+        "description": "How to replace Armoury Crate with GHelper",
+        "string": "# Replacing AC\nQ: *How do I uninstall AC?*\nA: Download the uninstaller from the [crate install page](<https://www.asus.com/supportonly/armoury%20crate/helpdesk_download/>). You should also uninstall MyAsus.\n***Note: Make sure to extract the uninstaller before running it, and to reboot after uninstalling.***\n\nQ: *Why should I use the uninstaller and not control panel? And should I use 3rd party like Revo?*\nA: The uninstaller makes sure that all files have been properly removed. Uninstallation via control panel may leave some files behind. You should also uninstall MyAsus. And no, you shouldn't use Revo. Just use the Asus uninstaller.\n\nQ: *Why should I replace AC with GHelper?*\nA: AC is a badly designed app. It's heavy, takes up lots of ram, and is buggy/laggy at times. GHelper, on the other hand, can do most, if not, everything that AC does, and uses much less ram, and is much more efficient. GHelper also has more configurability and functionality, with a much cleaner UI.\n\nNote: If the uninstaller fails, keep running it until it succeeds.\n\nThen grab GHelper from <https://github.com/seerge/g-helper/releases/latest>\n***Note: Make sure to extract GHelper before running it.***",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "runbenchmark":{
+        "name": "runbenchmark",
+        "description": "Run a 3DMark Timespy to help determine the issue",
+        "string":  "Run the ***Timespy benchmark*** from [3DMark demo](<https://store.steampowered.com/app/223850/3DMark/>) and send screenshots of all the graphs and the results screen. This may help us determine what's going on.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "sourcecode": {
+        "name": "sourcecode",
+        "description": "Source code for the bot",
+        "string": "Source code: <https://github.com/0x5b62656e5d/zephybot>",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "ssd": {
+        "name": "ssd",
+        "description": "How to optimize SSD performance",
+        "string": "# SSD optimization\n\nQ: *How do I optimize my SSD?*\nA: To maximize SSD performance, keep at least 30-35% free. For example, for a 1TB SSD, keep at least 300-350GB free. This is because when an SSD is nearly full, the controller has less free space available for read/write operations, leading to slower performance.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "syslogs": {
+        "name": "syslogs",
+        "description": "How to access & read system logs",
+        "string": "# How to read system logs\n1. Open `Computer Management` from Windows start menu\n2. On the left side, expand `System Tools` -> `Event Viewer` -> `Windows Logs` -> `System`\n\nNote: When reading system logs, ignore entires like `Kernel-power` or `Computer rebooted without cleanly shutting down` or `Unexpected reboot/shutdown`. These just tell you that the system suddenly lost power and experienced an unexpected reboot (likely a BSOD reboot or you force shut down via power button)",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "temps": {
+        "name": "temps",
+        "description": "Laptop temperatures",
+        "string": "# Temps\n\nQ: *My CPU is at 95C! My GPU is at 82C!*\nA: These temps are perfectly fine; the chips are designed to run at these temps (CPU < 98-99C, GPU < 84-86C). AMD/Intel and Nvidia have implemented safety mechanisms: the hardware will automatically throttle if it reaches dangerous temps.\n\nQ: *Is there anything I can do to improve the temps?*\nA: You can elevate the laptop for better airflow, or get a cooling pad. Usually, you shouldn't really have to repaste unless the laptop's pretty old or if there's a problem with stock LM/paste.\n\nQ: *Can I use my laptop closed?*\nA: It's not recommended to use the laptop closed. The laptop also dissipates heat from the keyboard, and closing it while using the laptop may trap the heat inside, causing damage to certain components.\n\nQ: *Can I use my laptop on my bed or cloth surfaces?*\nA: No, don't use your laptop on your bed. The cloth/soft surface may clog up the vents and \"choke\" the laptop. Use it on hard surfaces like wood or plastic.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "upgradebios": {
+        "name": "upgradebios",
+        "description": "How to upgrade BIOS",
+        "string": "# Upgrading BIOS\n\nTo update bios, download the EZFlash file from Asus, and move it onto a USB drive. Boot into BIOS, and change to advanced mode (should be `F7`). Go to the `Advanced` tab, and select the `EZ Flash Utility` menu. Select the drive, then the file, and proceed to flash.\nOfficial how-to from Asus: https://youtu.be/UUXrTExXDes\n\nQ: *Do I have to rename or format anything to flash?*\nA: No, just drag the file into the USB and boot into BIOS to flash.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "upgrading": {
+        "name": "upgrading",
+        "description": "Upgrading the laptop",
+        "string": "# Upgrading\n\nQ: *Do I need to unplug the battery when upgrading SSD, network card, or RAM?*\nA: No, you shouldn't need to. Lots of people have accidentally shorted/fried the motherboard in the process. Just shut downt he lapto properly and upgrade the parts.\n\nNote: Most newer than 2023 has an ambient light sensor that automatically cut the power upon opening the cover. To restore power to the laptop, close the cover and plug in the AC adapter and boot it. It looks something like the image attached below. https://imgur.com/a/q1uNZzr\n\nNote: The RAM of ROG Zephyrus models released after 2024 are not able to be upgraded. Only the SSD and the network card can be upgraded for those models.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "wireless": {
+        "name": "wireless",
+        "description": "I'm having wireless issues",
+        "string": "# Connectivity issues\n\nIf you're having connectivity issues, you most likely have a Mediatek or Realtek network card.\n\n- Tempfix: Try performing a nvram reset (Refer to `/nvram`).\n- Permafix: Swap out the current network card for an Intel AX210.",
+        "options": [
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "askai": {
+        "name": "askai",
+        "description": "Ask AI a question",
+        "options": [
+            {
+                "name": "question",
+                "description": "The question to ask AI",
+                "required": true
+            },
+            {
+                "name": "target",
+                "description": "The user to ping",
+                "required": false
+            }
+        ]
+    },
+    "help": {
+        "name": "help",
+        "description": "What commands are available?",
+        "options": []
+    },
+    "listtodo": {
+        "name": "listtodo",
+        "description": "List of todos",
+        "options": []
+    },
+    "ping": {
+        "name": "ping",
+        "description": "pong!",
+        "options": []
+    }
+}
