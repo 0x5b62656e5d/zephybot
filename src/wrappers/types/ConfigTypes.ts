@@ -34,7 +34,13 @@ interface CommandEntry {
     name: string;
     description: string;
     string?: string;
-    options: [string, string, boolean][];
+    options: CommandOptions[];
+}
+
+interface CommandOptions {
+    name: string;
+    description: string;
+    required: boolean;
 }
 
 export { Config, BotConfig, ApiKeys, DatabaseConfig };
