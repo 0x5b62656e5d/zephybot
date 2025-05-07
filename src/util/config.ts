@@ -62,7 +62,7 @@ const config: Config = {
                 "https://cdn.discordapp.com/avatars/1151023270636818483/e0fb09065c262cd885289203bb4219f6.webp?size=1024&width=0&height=230",
             DEV_PFP: "https://cdn.pepper.fyi/pfp.png",
             COMMAND_MAP: JSON.parse(
-                readFileSync(path.join(process.cwd(), "src", "util", "faqmap.json"), "utf-8")
+                readFileSync(path.join(process.cwd(), "src", "util", "commandmap.json"), "utf-8")
             ),
         },
     },

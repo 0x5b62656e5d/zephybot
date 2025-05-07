@@ -312,10 +312,10 @@
             }
         ]
     },
-    "runbenchmark":{
+    "runbenchmark": {
         "name": "runbenchmark",
         "description": "Run a 3DMark Timespy to help determine the issue",
-        "string":  "Run the ***Timespy benchmark*** from [3DMark demo](<https://store.steampowered.com/app/223850/3DMark/>) and send screenshots of all the graphs and the results screen. This may help us determine what's going on.",
+        "string": "Run the ***Timespy benchmark*** from [3DMark demo](<https://store.steampowered.com/app/223850/3DMark/>) and send screenshots of all the graphs and the results screen. This may help us determine what's going on.",
         "options": [
             {
                 "name": "target",
