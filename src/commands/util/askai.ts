@@ -25,7 +25,7 @@ module.exports = {
                 .setDescription(commandEntry.options[0].description)
                 .setRequired(commandEntry.options[0].required)
         )
-        .addStringOption(option =>
+        .addUserOption(option =>
             option
                 .setName(commandEntry.options[1].name)
                 .setDescription(commandEntry.options[1].description)
