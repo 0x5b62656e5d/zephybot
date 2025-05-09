@@ -22,7 +22,7 @@ module.exports = {
         .addStringOption(option =>
             option
                 .setName(commandEntry.options[0].name)
-                .setDescription(commandEntry.options[1].description)
+                .setDescription(commandEntry.options[0].description)
                 .setRequired(commandEntry.options[0].required)
         )
         .addStringOption(option =>
@@ -52,7 +52,7 @@ module.exports = {
         }
 
         const prompt = (interaction.options as CommandInteractionOptionResolver).getString(
-            "prompt"
+            commandEntry.options[0].name
         );
 
         await interaction.deferReply();
