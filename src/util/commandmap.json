@@ -399,7 +399,7 @@
     "upgrading": {
         "name": "upgrading",
         "description": "Upgrading the laptop",
-        "string": "# Upgrading\n\nQ: *Do I need to unplug the battery when upgrading SSD, network card, or RAM?*\nA: No, you shouldn't need to. Lots of people have accidentally shorted/fried the motherboard in the process. Just shut downt he lapto properly and upgrade the parts.\n\nNote: Most newer than 2023 has an ambient light sensor that automatically cut the power upon opening the cover. To restore power to the laptop, close the cover and plug in the AC adapter and boot it. It looks something like the image attached below. https://imgur.com/a/q1uNZzr\n\nNote: The RAM of ROG Zephyrus models released after 2024 are not able to be upgraded. Only the SSD and the network card can be upgraded for those models.",
+        "string": "# Upgrading\n\nQ: *Do I need to unplug the battery when upgrading SSD, network card, or RAM?*\nA: No, you shouldn't need to. Lots of people have accidentally shorted/fried the motherboard in the process. Just shut down the laptop properly and upgrade the parts.\n\nNote: Most newer than 2023 has an ambient light sensor that automatically cut the power upon opening the cover. To restore power to the laptop, close the cover and plug in the AC adapter and boot it. The sensor looks something like the image attached below. https://imgur.com/a/q1uNZzr\n\nNote: The RAM of ROG Zephyrus models released after 2024 are not able to be upgraded. Only the SSD and the network card can be upgraded for those models.",
         "options": [
             {
                 "name": "target",
