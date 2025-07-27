@@ -3,8 +3,13 @@ services:
     image: zephybot
     container_name: zephybot
     restart: unless-stopped
-    env_file: 
-      - ./.env
+    environment:
+      - TOKEN=${TOKEN}
+      - DEV_GUILD_ID=${DEV_GUILD_ID}
+      - DEV_USER_ID=${DEV_USER_ID}
+      - APPLICATION_ID=${APPLICATION_ID}
+      - DM_CHANNEL_ID=${DM_CHANNEL_ID}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
