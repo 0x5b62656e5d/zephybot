@@ -147,7 +147,7 @@
     "cleanstall": {
         "name": "cleanstall",
         "description": "Cleanstall guide",
-        "string": "# Cleanstall guide\n\n<https://hackmd.io/@0x5b62656e5d/SJtCtOAuC>",
+        "string": "# Cleanstall guide\n\n<https://hackmd.io/@0x5b62656e5d/asus-cleanstall>",
         "options": [
             {
                 "name": "target",
