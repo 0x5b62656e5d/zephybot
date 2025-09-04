@@ -204,18 +204,6 @@
             }
         ]
     },
-    "ghelper-certificate": {
-        "name": "ghelper-certificate",
-        "description": "Windows Defender thinks GHelper is a virus",
-        "string": "# GHelper app certificate\n\nAccording to the developer, GHelper does not have a signed certificate. This is because it costs unreasonably high amounts of money to purchase a reliable certificate. Therefore, Windows Defender may flag it as a virus. If a popup appears saying something along the lines of \"Unrecognized app,\" click `More info` then `Run anyway`.\n\nNote that GHelper does not contain any malware. The code is open source and can be found [here](<https://github.com/seerge/g-helper>). Feel free to go through the code and verify that it doesn't contain any malware.",
-        "options": [
-            {
-                "name": "target",
-                "description": "The user to ping",
-                "required": false
-            }
-        ]
-    },
     "ghelper": {
         "name": "ghelper",
         "description": "GHelper link",
