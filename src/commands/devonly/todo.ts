@@ -1,15 +1,14 @@
 import {
     ChannelType,
-    CommandInteraction,
-    CommandInteractionOptionResolver,
+    ChatInputCommandInteraction,
     DMChannel,
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
 import { customAlphabet } from "nanoid";
 import config from "../../util/config";
-import { getFileBaseName } from "../../util/filebasename";
 import { insertEntry } from "../../util/database";
+import { getFileBaseName } from "../../util/filebasename";
 
 const getHash = customAlphabet("1234567890abcdef", 6);
 
@@ -31,7 +30,7 @@ module.exports = {
                 .setDescription(commandEntry.options[1].description)
                 .setRequired(commandEntry.options[1].required)
         ),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
@@ -39,12 +38,8 @@ module.exports = {
             });
         }
 
-        const name = (interaction.options as CommandInteractionOptionResolver).getString(
-            commandEntry.options[0].name
-        );
-        const description = (interaction.options as CommandInteractionOptionResolver).getString(
-            commandEntry.options[1].name
-        );
+        const name = interaction.options.getString(commandEntry.options[0].name);
+        const description = interaction.options.getString(commandEntry.options[1].name);
 
         if (!name) {
             return interaction.reply({

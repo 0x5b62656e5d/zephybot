@@ -2,14 +2,14 @@ import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    CommandInteraction,
+    ChatInputCommandInteraction,
     EmbedBuilder,
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
 import config from "../../util/config";
-import { getFileBaseName } from "../../util/filebasename";
 import { getAllEntries } from "../../util/database";
+import { getFileBaseName } from "../../util/filebasename";
 
 const zephybotPfp = `https://cdn.discordapp.com/avatars/1151023270636818483/e0fb09065c262cd885289203bb4219f6.webp?size=1024&width=0&height=230`;
 const pepperPfp = `https://cdn.pepper.fyi/pfp.png`;
@@ -20,7 +20,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName(commandEntry.name)
         .setDescription(commandEntry.description),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
             .setLabel("Delete")

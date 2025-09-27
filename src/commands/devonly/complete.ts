@@ -1,7 +1,6 @@
 import {
     ChannelType,
-    CommandInteraction,
-    CommandInteractionOptionResolver,
+    ChatInputCommandInteraction,
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
@@ -21,7 +20,7 @@ module.exports = {
                 .setDescription(commandEntry.options[0].description)
                 .setRequired(commandEntry.options[0].required)
         ),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
@@ -29,9 +28,7 @@ module.exports = {
             });
         }
 
-        const hash = (interaction.options as CommandInteractionOptionResolver).getString(
-            commandEntry.options[0].name
-        );
+        const hash = interaction.options.getString(commandEntry.options[0].name);
 
         if (!hash) {
             return interaction.reply({

@@ -2,16 +2,15 @@ import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    CommandInteraction,
-    CommandInteractionOptionResolver,
+    ChatInputCommandInteraction,
     GuildMemberRoleManager,
     MessageActionRowComponentBuilder,
     MessageFlags,
     SlashCommandBuilder,
 } from "discord.js";
-import { getGeminiResponse } from "../../util/genai";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
+import { getGeminiResponse } from "../../util/genai";
 
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
@@ -31,7 +30,7 @@ module.exports = {
                 .setDescription(commandEntry.options[1].description)
                 .setRequired(commandEntry.options[1].required)
         ),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         if (!interaction.inGuild()) {
             return interaction.reply({
                 content: "This command can only be used in a server.",
@@ -51,9 +50,7 @@ module.exports = {
             });
         }
 
-        const prompt = (interaction.options as CommandInteractionOptionResolver).getString(
-            commandEntry.options[0].name
-        );
+        const prompt = interaction.options.getString(commandEntry.options[0].name);
 
         await interaction.deferReply();
 
@@ -66,9 +63,7 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const target = (interaction.options as CommandInteractionOptionResolver).getUser(
-            commandEntry.options[1].name
-        );
+        const target = interaction.options.getUser(commandEntry.options[1].name);
 
         if (response) {
             try {

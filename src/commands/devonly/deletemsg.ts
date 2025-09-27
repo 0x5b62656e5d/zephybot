@@ -1,9 +1,4 @@
-import {
-    CommandInteraction,
-    CommandInteractionOptionResolver,
-    MessageFlags,
-    SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, MessageFlags, SlashCommandBuilder } from "discord.js";
 import config from "../../util/config";
 import { getFileBaseName } from "../../util/filebasename";
 
@@ -19,7 +14,7 @@ module.exports = {
                 .setDescription(commandEntry.options[0].description)
                 .setRequired(commandEntry.options[0].required)
         ),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         if (interaction.user.id !== config.bot.DEV_USER_ID) {
             return interaction.reply({
                 content: "You are not allowed to use this command.",
@@ -27,9 +22,7 @@ module.exports = {
             });
         }
 
-        const messageId = (interaction.options as CommandInteractionOptionResolver).getString(
-            commandEntry.options[0].name
-        );
+        const messageId = interaction.options.getString(commandEntry.options[0].name);
 
         if (!messageId) {
             return interaction.reply({

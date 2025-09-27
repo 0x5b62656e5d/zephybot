@@ -2,14 +2,14 @@ import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    CommandInteraction,
+    ChatInputCommandInteraction,
     EmbedBuilder,
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
 import { commandsList } from "../../index";
-import { EmbedPagination } from "../../util/embedpagination";
 import config from "../../util/config";
+import { EmbedPagination } from "../../util/embedpagination";
 import { getFileBaseName } from "../../util/filebasename";
 
 const cmdPerPage = config.bot.commands.COMMANDS_PER_HELP_PAGE;
@@ -17,8 +17,10 @@ const cmdPerPage = config.bot.commands.COMMANDS_PER_HELP_PAGE;
 const commandEntry = config.bot.commands.COMMAND_MAP[getFileBaseName(__filename)];
 
 module.exports = {
-    data: new SlashCommandBuilder().setName(commandEntry.name).setDescription(commandEntry.description),
-    async execute(interaction: CommandInteraction) {
+    data: new SlashCommandBuilder()
+        .setName(commandEntry.name)
+        .setDescription(commandEntry.description),
+    async execute(interaction: ChatInputCommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
             .setLabel("Delete")

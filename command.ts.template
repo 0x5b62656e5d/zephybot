@@ -2,8 +2,7 @@ import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
-    CommandInteraction,
-    CommandInteractionOptionResolver,
+    ChatInputCommandInteraction,
     MessageActionRowComponentBuilder,
     SlashCommandBuilder,
 } from "discord.js";
@@ -15,7 +14,7 @@ module.exports = {
         .setName("template")
         .setDescription("Template description")
         .addStringOption(option => option.setName("template").setDescription("Template description")),
-    async execute(interaction: CommandInteraction) {
+    async execute(interaction: ChatInputCommandInteraction) {
         const delMsg = new ButtonBuilder()
             .setCustomId(`delMsg.${interaction.user.id}`)
             .setLabel("Delete")
@@ -23,7 +22,7 @@ module.exports = {
 
         const row = new ActionRowBuilder<MessageActionRowComponentBuilder>().addComponents(delMsg);
 
-        const template = (interaction.options as CommandInteractionOptionResolver).getUser("template");
+        const template = interaction.options.getUser("template");
 
         if (template) {
             return interaction.reply({

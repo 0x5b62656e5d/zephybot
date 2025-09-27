@@ -4,7 +4,7 @@ import {
     APIMessageTopLevelComponent,
     ButtonBuilder,
     ButtonStyle,
-    CommandInteraction,
+    ChatInputCommandInteraction,
     ComponentType,
     EmbedBuilder,
     JSONEncodable,
@@ -14,7 +14,7 @@ import {
 } from "discord.js";
 
 export const EmbedPagination = async (
-    interaction: CommandInteraction,
+    interaction: ChatInputCommandInteraction,
     pages: EmbedBuilder[],
     time: number = 30 * 1000,
     components: (
