@@ -1,6 +1,7 @@
-import config from "../util/config";
+import { expect, test } from "@jest/globals";
 import { readdirSync, readFileSync } from "fs";
 import path from "path";
+import config from "../util/config";
 import { getFileBaseName } from "../util/filebasename";
 
 const commandsDir = path.resolve(process.cwd(), "src", "commands");
