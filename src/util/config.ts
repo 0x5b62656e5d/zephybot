@@ -71,7 +71,7 @@ const config: Config = {
     },
     database: {
         database: loadDatabase(
-            path.join("data", `${process.env.DB_FILE === "test" ? `test` : `database`}.sqlite`)
+            path.join("/data", `${process.env.DB_FILE === "test" ? `test` : `database`}.sqlite`)
         ),
     },
     logger: {
