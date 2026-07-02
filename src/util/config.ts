@@ -70,7 +70,6 @@ const config: Config = {
         GEMINI: process.env.GEMINI_API_KEY,
     },
     database: {
-        path: path.resolve(process.cwd(), "data"),
         database: loadDatabase(
             path.join("data", `${process.env.DB_FILE === "test" ? `test` : `database`}.sqlite`)
         ),

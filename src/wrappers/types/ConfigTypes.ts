@@ -43,7 +43,6 @@ interface CommandOptions {
 }
 
 interface DatabaseConfig {
-    path: string;
     database: DatabaseType;
 }
 
